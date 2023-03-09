@@ -1,6 +1,15 @@
 * {
     margin: 0;
 }
+
+@font-face {
+    font-family: StratosSkyeng;
+    src: url(/fonts/statosskyeng-v1.001/Desktop\ fonts/stratosskyeng-regular.otf) format(opentype);
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    font-variant: normal;
+}
 body{
     display: flex;
     align-items: center;
@@ -9,6 +18,7 @@ body{
 }
 
 .app{
+    font-family: StratosSkyeng;
     display: flex;
     box-sizing: border-box;
     gap: 40px;
@@ -33,18 +43,23 @@ body{
     display: flex;
     flex-direction: row;
     gap: 10px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
 }
 
 .input {
-	display: inline-block;
-	margin-right: 10px;
+	display: flex;
+    height: 100px;
+    width: 100px;
+    
 }
 .input[type=radio] {
 	display: none;
 }
 .buttons-label {
-   
-	display: inline-block;
+    font-size: 64px;
 	cursor: pointer;
 	padding: 0px 15px;
 	line-height: 34px;
@@ -52,6 +67,13 @@ body{
 	border-radius: 6px;
 	user-select: none;
     background-color: #fff;
+    color: #0080C1;
+    height: 100px;
+    width: 100px;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
 }
  
 /* Checked */
@@ -68,6 +90,7 @@ body{
 .input[type=radio]:disabled + label {
 	background: #efefef;
 	color: #666;
+    
 }
 
 .button__start {
@@ -79,4 +102,5 @@ body{
     padding: 2px;
     color: #fff;
     font-size: 24px;
+    font-family: StratosSkyeng;
 }
