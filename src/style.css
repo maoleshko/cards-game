@@ -1,0 +1,110 @@
+* {
+    margin: 0;
+}
+
+@font-face {
+    font-family: StratosSkyeng;
+    src: url(/fonts/statosskyeng-v1.001/Web\ fonts/stratosskyengweb-regular.woff)
+            format(woff),
+        url(/fonts/statosskyeng-v1.001/Web\ fonts/stratosskyengweb-regular.woff2)
+            format(woff2);
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    font-variant: normal;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #004980;
+}
+
+.app {
+    margin: auto;
+    font-family: StratosSkyeng;
+    display: flex;
+    box-sizing: border-box;
+    gap: 40px;
+    margin-top: 100px;
+    width: 480px;
+    background: #c2f5ff;
+    border: none;
+    color: #004980;
+    align-items: center;
+    flex-direction: column;
+    padding: 50px 50px 70px 70px;
+    border-radius: 8px;
+    align-items: center;
+}
+
+.title {
+    font-size: 40px;
+    text-align: center;
+}
+
+.level__content {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+.input {
+    display: flex;
+    height: 100px;
+    width: 100px;
+}
+.input[type='radio'] {
+    display: none;
+}
+.button-label {
+    font-size: 64px;
+    cursor: pointer;
+    padding: 0px 15px;
+    line-height: 34px;
+    border: 1px solid #999;
+    border-radius: 6px;
+    user-select: none;
+    background-color: #fff;
+    color: #0080c1;
+    height: 100px;
+    width: 100px;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+/* Checked */
+.input[type='radio']:checked + label {
+    border: 3px solid #004980;
+}
+
+/* Hover */
+.button-label:hover {
+    color: #666;
+}
+
+/* Disabled */
+.input[type='radio']:disabled + label {
+    background: #efefef;
+    color: #666;
+}
+
+.button__start {
+    border-radius: 8px;
+    width: 100%;
+    height: 50px;
+    border: none;
+    background-color: #7ac100;
+    padding: 2px;
+    color: #fff;
+    font-size: 24px;
+    font-family: StratosSkyeng;
+}

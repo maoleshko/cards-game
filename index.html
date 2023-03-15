@@ -1,37 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="style.css" rel="stylesheet" type="text/css" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="src/style.css" rel="stylesheet" type="text/css" />
     <title>Карточная игра</title>
-</head>
-<body>
-
+  </head>
+  <body>
     <div class="app"></div>
 
-    
-    <script src="render.js"></script> 
-    <script>
-        window.application = {
-            blocks: {},
-            screens: {},
-            renderScreen: function(screenName) {
-                this.screens[screenName] ()
-            },
-            renderBlock:function(blockName, container) {
-                this.blocks[blockName] (container)
-            },
-        levels: [],
-    }
+    <script src="src/render.js"></script>
+    <script src="src/index.js"></script>
+    <script src="src/diff-selection.js"></script>
+    <script src="src/play-fields.js"></script>
 
-    window.application.blocks['blockChoice'] = renderBlockChoice;
-    window.application.screens['screenChoice'] = renderScreenChoice;
-    window.application.renderScreen('screenChoice');
-    </script> 
-    <script src="diff-selection.js"></script>
-    
-</body>
-
+  </body>
 </html>
