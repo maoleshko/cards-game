@@ -1,4 +1,6 @@
 function renderPlayBlock(container) {
+    const div = document.createElement('div')
+    div.classList.add('game-menu')
     const h1 = document.createElement('h1')
     h1.textContent = '00:00'
     h1.classList.add('timer')
@@ -7,11 +9,9 @@ function renderPlayBlock(container) {
     resetButton.textContent = 'Начать заново'
     resetButton.classList.add('button', 'btn-reset')
 
-
-    container.appendChild(h1)
-    container.appendChild(resetButton)
-    
-    
+    div.appendChild(h1)
+    div.appendChild(resetButton)
+    container.appendChild(div)  
 }
 
 window.application.blocks['play'] = renderPlayBlock
@@ -75,39 +75,39 @@ function renderCardListBlock(container) {
             image: './img/7c.png',
         },
         {
-            id: 'hearts-6',
-            name: 'Hearts 6',
-            image: './img/6c.png',
+            id: 'hearts-8',
+            name: 'Hearts 8',
+            image: './img/8c.png',
         },
         {
-            id: 'hearts-7',
-            name: 'Hearts 7',
-            image: './img/7c.png',
+            id: 'hearts-9',
+            name: 'Hearts 9',
+            image: './img/9c.png',
         },
         {
-            id: 'hearts-6',
-            name: 'Hearts 6',
-            image: './img/6c.png',
+            id: 'hearts-10',
+            name: 'Hearts 10',
+            image: './img/10c.png',
         },
         {
-            id: 'hearts-7',
-            name: 'Hearts 7',
-            image: './img/7c.png',
+            id: 'hearts-j',
+            name: 'Hearts j',
+            image: './img/jc.png',
         },
         {
-            id: 'hearts-6',
-            name: 'Hearts 6',
-            image: './img/6c.png',
+            id: 'hearts-q',
+            name: 'Hearts q',
+            image: './img/qc.png',
         },
         {
-            id: 'hearts-7',
-            name: 'Hearts 7',
-            image: './img/7c.png',
+            id: 'hearts-k',
+            name: 'Hearts k',
+            image: './img/kc.png',
         },
         {
-            id: 'hearts-7',
-            name: 'Hearts 7',
-            image: './img/7c.png',
+            id: 'hearts-a',
+            name: 'Hearts a',
+            image: './img/ac.png',
         },
 
         {
@@ -121,49 +121,39 @@ function renderCardListBlock(container) {
             image: './img/7b.png',
         },
         {
-            id: 'diamonds-6',
-            name: 'diamonds 6',
-            image: './img/6b.png',
+            id: 'diamonds-8',
+            name: 'diamonds 8',
+            image: './img/8b.png',
         },
         {
-            id: 'diamonds-7',
-            name: 'diamonds 7',
-            image: './img/7b.png',
+            id: 'diamonds-9',
+            name: 'diamonds 9',
+            image: './img/9b.png',
         },
         {
-            id: 'diamonds-6',
-            name: 'diamonds 6',
-            image: './img/6b.png',
+            id: 'diamonds-10',
+            name: 'diamonds 10',
+            image: './img/10b.png',
         },
         {
-            id: 'diamonds-7',
-            name: 'diamonds 7',
-            image: './img/7b.png',
+            id: 'diamonds-j',
+            name: 'diamonds j',
+            image: './img/jb.png',
         },
         {
-            id: 'diamonds-6',
-            name: 'diamonds 6',
-            image: './img/6b.png',
+            id: 'diamonds-q',
+            name: 'diamonds q',
+            image: './img/qb.png',
         },
         {
-            id: 'diamonds-7',
-            name: 'diamonds 7',
-            image: './img/7b.png',
+            id: 'diamonds-k',
+            name: 'diamonds k',
+            image: './img/kb.png',
         },
         {
-            id: 'diamonds-7',
-            name: 'diamonds 7',
-            image: './img/7b.png',
-        },
-        {
-            id: 'clubs-6',
-            name: 'clubs 6',
-            image: './img/6k.png',
-        },
-        {
-            id: 'clubs-7',
-            name: 'clubs 7',
-            image: './img/7k.png',
+            id: 'diamonds-a',
+            name: 'diamonds a',
+            image: './img/ab.png',
         },
         {
             id: 'clubs-6',
@@ -176,35 +166,40 @@ function renderCardListBlock(container) {
             image: './img/7k.png',
         },
         {
-            id: 'clubs-6',
-            name: 'clubs 6',
-            image: './img/6k.png',
+            id: 'clubs-8',
+            name: 'clubs 8',
+            image: './img/8k.png',
         },
         {
-            id: 'clubs-7',
-            name: 'clubs 7',
-            image: './img/7k.png',
+            id: 'clubs-9',
+            name: 'clubs 9',
+            image: './img/9k.png',
         },
         {
-            id: 'clubs-6',
-            name: 'clubs 6',
-            image: './img/6k.png',
+            id: 'clubs-10',
+            name: 'clubs 10',
+            image: './img/10k.png',
         },
         {
-            id: 'clubs-7',
-            name: 'clubs 7',
-            image: './img/7k.png',
+            id: 'clubs-j',
+            name: 'clubs j',
+            image: './img/jk.png',
         },
         {
-            id: 'clubs-7',
-            name: 'clubs 7',
-            image: './img/7k.png',
+            id: 'clubs-q',
+            name: 'clubs q',
+            image: './img/qk.png',
+        },
+        {
+            id: 'clubs-k',
+            name: 'clubs k',
+            image: './img/kk.png',
+        },
+        {
+            id: 'clubs-a',
+            name: 'clubs a',
+            image: './img/ak.png',
         }
-
-
-
-
-
     ]
 
     cardListData.forEach((card) => {
@@ -215,22 +210,24 @@ function renderCardListBlock(container) {
         imgElement.setAttribute('alt', card.name)
         cardElement.appendChild(imgElement)
         document.body.appendChild(cardElement)
-    })
 
-    container.appendChild(cardListData);
-    
+        container.appendChild(cardElement)
+    })
 }
 
 window.application.blocks['cardList'] = renderCardListBlock
 
 function renderPlayScreen() {
+    const app = document.querySelector('.app')
+    app.classList.remove('display', 'none')
+    const div = document.createElement('div')
+    div.classList.add('cardArray')
+    app.classList.add('app-hide')
 
     window.application.renderBlock('play', div);
     window.application.renderBlock('cardList', div);
 
-    app.appendChild(h1)
-    app.appendChild(cardField)
-
+    document.body.appendChild(div)    
 }
 
 window.application.screens['play'] = renderPlayScreen

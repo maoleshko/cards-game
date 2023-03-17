@@ -39,6 +39,9 @@ body {
     border-radius: 8px;
     align-items: center;
 }
+.app-hide {
+    display: none;
+}
 
 .title {
     font-size: 40px;
@@ -97,9 +100,9 @@ body {
     color: #666;
 }
 
-.button__start {
+.button {
     border-radius: 8px;
-    width: 100%;
+    width: 246px;
     height: 50px;
     border: none;
     background-color: #7ac100;
@@ -107,4 +110,28 @@ body {
     color: #fff;
     font-size: 24px;
     font-family: StratosSkyeng;
+}
+.cardArray{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    padding-left: 25px;
+    padding-right: 25px;
+    width: 1024px;
+    gap: 15px;
+}
+.game-menu{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 50px;
+}
+.timer {
+    color: #fff;
+    font-family: StratosSkyeng;
+    font-size: 64px;
+}
+.card-back{
+    background-image: url(https://phonoteka.org/uploads/posts/2021-11/1635890690_3-phonoteka-org-p-fon-dlya-rubashki-kart-krasivie-3.png)
 }
