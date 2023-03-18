@@ -1,3 +1,4 @@
+
 function renderPlayBlock(container) {
     const div = document.createElement('div')
     div.classList.add('game-menu')
@@ -11,7 +12,9 @@ function renderPlayBlock(container) {
 
     div.appendChild(h1)
     div.appendChild(resetButton)
-    container.appendChild(div)  
+    container.appendChild(div) 
+
+     
 }
 
 window.application.blocks['play'] = renderPlayBlock
@@ -213,6 +216,29 @@ function renderCardListBlock(container) {
 
         container.appendChild(cardElement)
     })
+
+    function renderCardList(level) {
+    let diffCards = [];
+    const rang = ['6', '7', '8', '9', '10', 'j', 'q', 'k', 'a'];
+    const suit = ['b', 'c', 'k', 'p'];
+    for (let i = 0; i < level / 2; i++) {
+        const randomRang = Math.floor(Math.random() * rang.length);
+        const randomSuit = Math.floor(Math.random() * suit.length);
+        const randomCard = rang[randomRang] + suit[randomSuit] + '.png';
+        diffCards.push(randomCard);
+    }
+    return diffCards;
+    
+}
+
+    // function renderCardList(level) {
+    //     const parent = document.querySelector('.cards__container');
+    //     const divs = card();
+    //     while (divs.length) {
+    //         parent.append(divs.splice(Math.floor(Math.random() * divs.length), 1)[0]);
+    //     }
+    // };
+    
 }
 
 window.application.blocks['cardList'] = renderCardListBlock
@@ -221,7 +247,7 @@ function renderPlayScreen() {
     const app = document.querySelector('.app')
     app.classList.remove('display', 'none')
     const div = document.createElement('div')
-    div.classList.add('cardArray')
+    div.classList.add('cards__container')
     app.classList.add('app-hide')
 
     window.application.renderBlock('play', div);
@@ -233,3 +259,5 @@ function renderPlayScreen() {
 window.application.screens['play'] = renderPlayScreen
 
 // window.application.renderScreen('play');
+
+

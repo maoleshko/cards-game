@@ -111,7 +111,7 @@ body {
     font-size: 24px;
     font-family: StratosSkyeng;
 }
-.cardArray{
+.cards__container {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -120,7 +120,7 @@ body {
     width: 1024px;
     gap: 15px;
 }
-.game-menu{
+.game-menu {
     width: 100%;
     display: flex;
     align-items: center;
@@ -132,6 +132,6 @@ body {
     font-family: StratosSkyeng;
     font-size: 64px;
 }
-.card-back{
+.card-back {
     background-image: url(https://phonoteka.org/uploads/posts/2021-11/1635890690_3-phonoteka-org-p-fon-dlya-rubashki-kart-krasivie-3.png)
 }

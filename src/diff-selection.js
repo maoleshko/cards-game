@@ -14,13 +14,13 @@ function gameStart() {
             switch (window.application.levels) {
                 case '1':
                     APP_CONTAINER.innerHTML = '';
-                    window.application.renderScreen('play');
+                    renderCardList(6)
                     break
                 case '2':
-                    console.log('экран сложность 2')
+                    renderCardList(12)
                     break
                 case '3':
-                    console.log('экран сложность 3')
+                    renderCardList(18)
                     break
                 default:
                     break
