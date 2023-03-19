@@ -116,9 +116,9 @@ body {
 .cards_container {
     display: flex;
     flex-wrap: wrap;
-    padding-left: 25px;
-    padding-right: 25px;
-    width: 1024px;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 650px;
     gap: 15px;
     justify-content: center;
 }
