@@ -1,26 +1,7 @@
+function renderCardList(cardListNumber) {
 
-function renderPlayBlock(container) {
-    const div = document.createElement('div')
-    div.classList.add('game-menu')
-    const h1 = document.createElement('h1')
-    h1.textContent = '00:00'
-    h1.classList.add('timer')
+    const cards_container = document.querySelector('.cards_container')
 
-    const resetButton = document.createElement('button')
-    resetButton.textContent = 'Начать заново'
-    resetButton.classList.add('button', 'btn-reset')
-
-    div.appendChild(h1)
-    div.appendChild(resetButton)
-    container.appendChild(div) 
-
-     
-}
-
-window.application.blocks['play'] = renderPlayBlock
-
-function renderCardListBlock(container) {
-    
     const cardListData = [
         {
             id: 'spades-6',
@@ -204,38 +185,20 @@ function renderCardListBlock(container) {
             image: './img/ak.png',
         }
     ]
-
-    cardListData.forEach((card) => {
+// Возвращаем новый массив элементов, который будет содержать от 0 до указанного количества карт
+    const cardList = cardListData.slice(0, cardListNumber)
+    // Для каждого элемента массива будет создан div 
+    cardList.forEach((card) => {
         const cardElement = document.createElement('div')
         cardElement.classList.add('card')
+        //Создаем элемент img и указываем атрибуты
         const imgElement = document.createElement('img')
+        //Задаем атрибуты для игоровой карточки
         imgElement.setAttribute('src', card.image)
         imgElement.setAttribute('alt', card.name)
+        // Добавляем элемент в div с классом card
         cardElement.appendChild(imgElement)
-        document.body.appendChild(cardElement)
-
-        container.appendChild(cardElement)
+        // Добавляем элемент div с классом card на освной экран с контейнер
+        cards_container.appendChild(cardElement)
     })
-    
 }
-
-window.application.blocks['cardList'] = renderCardListBlock
-
-function renderPlayScreen() {
-    const app = document.querySelector('.app')
-    app.classList.remove('display', 'none')
-    const div = document.createElement('div')
-    div.classList.add('cards__container')
-    app.classList.add('app-hide')
-
-    window.application.renderBlock('play', div);
-    window.application.renderBlock('cardList', div);
-
-    document.body.appendChild(div)    
-}
-
-window.application.screens['play'] = renderPlayScreen
-
-// window.application.renderScreen('play');
-
-

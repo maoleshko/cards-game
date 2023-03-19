@@ -29,6 +29,7 @@ function renderScreenChoice() {
     const buttonStart = document.createElement('button')
     buttonStart.classList.add('button__start', 'button')
     buttonStart.textContent = 'Старт'
+    
 
     window.application.renderBlock('blockChoice', levelContent)
     app.appendChild(title)
