@@ -185,10 +185,16 @@ function renderCardList(cardListNumber) {
             image: './img/ak.png',
         }
     ]
+
+    shuffle(cardListData);
+
 // Возвращаем новый массив элементов, который будет содержать от 0 до указанного количества карт
     const cardList = cardListData.slice(0, cardListNumber)
+    const duplicateCardsArray = duplicateArray(cardList);
+    shuffle(duplicateCardsArray);
+    console.log(duplicateCardsArray)
     // Для каждого элемента массива будет создан div 
-    cardList.forEach((card) => {
+    duplicateCardsArray.forEach((card) => {
         const cardElement = document.createElement('div')
         cardElement.classList.add('card')
         //Создаем элемент img и указываем атрибуты
@@ -201,4 +207,25 @@ function renderCardList(cardListNumber) {
         // Добавляем элемент div с классом card на освной экран с контейнер
         cards_container.appendChild(cardElement)
     })
+
+    
 }
+
+const shuffle = (array) => {
+    let currentIndex = array.length,
+        randomIndex;
+    while (currentIndex !== 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+        [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex],
+            array[currentIndex],
+        ];
+    }
+    return array;
+};
+
+const duplicateArray = (array) =>
+    array.reduce((res, current) => res.concat([current, current]), []);
+
+
