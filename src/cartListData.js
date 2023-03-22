@@ -1,5 +1,4 @@
 function renderCardList(cardListNumber) {
-
     const cards_container = document.querySelector('.cards_container')
 
     const cardListData = [
@@ -50,47 +49,47 @@ function renderCardList(cardListNumber) {
         },
         {
             id: 'hearts-6',
-            name: 'Hearts 6',
+            name: 'hearts 6',
             image: './img/6c.png',
         },
         {
             id: 'hearts-7',
-            name: 'Hearts 7',
+            name: 'hearts 7',
             image: './img/7c.png',
         },
         {
             id: 'hearts-8',
-            name: 'Hearts 8',
+            name: 'hearts 8',
             image: './img/8c.png',
         },
         {
             id: 'hearts-9',
-            name: 'Hearts 9',
+            name: 'hearts 9',
             image: './img/9c.png',
         },
         {
             id: 'hearts-10',
-            name: 'Hearts 10',
+            name: 'hearts 10',
             image: './img/10c.png',
         },
         {
             id: 'hearts-j',
-            name: 'Hearts j',
+            name: 'hearts j',
             image: './img/jc.png',
         },
         {
             id: 'hearts-q',
-            name: 'Hearts q',
+            name: 'hearts q',
             image: './img/qc.png',
         },
         {
             id: 'hearts-k',
-            name: 'Hearts k',
+            name: 'hearts k',
             image: './img/kc.png',
         },
         {
             id: 'hearts-a',
-            name: 'Hearts a',
+            name: 'hearts a',
             image: './img/ac.png',
         },
 
@@ -187,29 +186,93 @@ function renderCardList(cardListNumber) {
     ]
 
     shuffle(cardListData);
-
 // Возвращаем новый массив элементов, который будет содержать от 0 до указанного количества карт
     const cardList = cardListData.slice(0, cardListNumber)
-    const duplicateCardsArray = duplicateArray(cardList);
+    const duplicateCardsArray = duplicateArray(cardList); 
     shuffle(duplicateCardsArray);
-    console.log(duplicateCardsArray)
     // Для каждого элемента массива будет создан div 
     duplicateCardsArray.forEach((card) => {
         const cardElement = document.createElement('div')
-        cardElement.classList.add('card')
+        cardElement.classList.add('memory-card')
         //Создаем элемент img и указываем атрибуты
         const imgElement = document.createElement('img')
         //Задаем атрибуты для игоровой карточки
         imgElement.setAttribute('src', card.image)
         imgElement.setAttribute('alt', card.name)
+        imgElement.setAttribute('class', 'front-face')
+        cardElement.setAttribute('data-framework', `${card.name}`)
+        const imgElementBack = document.createElement('img')
+        imgElementBack.setAttribute('src', './img/back.png')
+        imgElementBack.setAttribute('alt', 'backSide')
+        imgElementBack.setAttribute('class', 'back-face')
         // Добавляем элемент в div с классом card
+        
         cardElement.appendChild(imgElement)
+        cardElement.appendChild(imgElementBack)
+       
         // Добавляем элемент div с классом card на освной экран с контейнер
         cards_container.appendChild(cardElement)
     })
 
-    
+    const cards = document.querySelectorAll('.memory-card');
+
+  let hasFlippedCard = false;
+  let lockBoard = false;
+  let firstCard, secondCard;
+
+  function flipCard() {
+    if (lockBoard) return;
+   if (this === firstCard) return;
+
+    this.classList.add('flip');
+
+    if (!hasFlippedCard) {
+      hasFlippedCard = true;
+      firstCard = this;
+      return;
+    }
+
+    secondCard = this;
+
+    checkForMatch();
+  }
+
+  function checkForMatch() {
+    let isMatch = firstCard.dataset.framework === secondCard.dataset.framework;
+    isMatch ? disableCards() : unflipCards();
+  }
+
+  function disableCards() {
+    firstCard.removeEventListener('click', flipCard);
+    secondCard.removeEventListener('click', flipCard);
+
+   resetBoard();
+  }
+
+  function unflipCards() {
+    lockBoard = true;
+
+    setTimeout(() => {
+      firstCard.classList.remove('flip');
+      secondCard.classList.remove('flip');
+
+     resetBoard();
+    }, 1500);
+  }
+
+ function resetBoard() {
+   [hasFlippedCard, lockBoard] = [false, false];
+   [firstCard, secondCard] = [null, null];
+ }
+
+  cards.forEach(card => card.addEventListener('click', flipCard));
 }
+
+
+
+
+
+
 
 const shuffle = (array) => {
     let currentIndex = array.length,
@@ -227,5 +290,4 @@ const shuffle = (array) => {
 
 const duplicateArray = (array) =>
     array.reduce((res, current) => res.concat([current, current]), []);
-
 
