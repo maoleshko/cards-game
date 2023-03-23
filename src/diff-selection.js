@@ -2,8 +2,8 @@ const APP_CONTAINER = document.querySelector('.app')
 const cards_container = document.querySelector('.cards_container')
 
 const button = document.querySelectorAll('.button')
-const boxButton = document.querySelector('.level__content')
-const startButton = document.querySelector('.button__start')
+const boxButton = document.querySelector('.level-content')
+const startButton = document.querySelector('.button-start')
 const labelsButton = document.querySelectorAll('.button-label')
 
 startButton.addEventListener('click', gameStart)

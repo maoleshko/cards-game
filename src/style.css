@@ -50,7 +50,7 @@ body {
     text-align: center;
 }
 
-.level__content {
+.level-content {
     display: flex;
     flex-direction: row;
     gap: 10px;

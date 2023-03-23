@@ -268,12 +268,6 @@ function renderCardList(cardListNumber) {
   cards.forEach(card => card.addEventListener('click', flipCard));
 }
 
-
-
-
-
-
-
 const shuffle = (array) => {
     let currentIndex = array.length,
         randomIndex;

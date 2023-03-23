@@ -25,9 +25,9 @@ function renderScreenChoice() {
     title.textContent = 'Выбери сложность'
 
     const levelContent = document.createElement('div')
-    levelContent.classList.add('level__content')
+    levelContent.classList.add('level-content')
     const buttonStart = document.createElement('button')
-    buttonStart.classList.add('button__start', 'button')
+    buttonStart.classList.add('button-start', 'button')
     buttonStart.textContent = 'Старт'
     
 
