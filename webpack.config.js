@@ -1,4 +1,6 @@
 const path = require('path')
+const HtmlWebpackPlugin = require ('html-webpack-plugin')
+const CopyPlugin = require ('copy-webpack-plugin')
 
 module.exports = {
   entry: './src/index.js',
@@ -20,4 +22,13 @@ module.exports = {
     filename: 'bundle.js',
     clean: true,
   }
+  plugins: [
+    new CopyPlagyn({
+      patterns[{ from: "static", to "static"}],
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: "./index.html",
+    }),
+],
 }
