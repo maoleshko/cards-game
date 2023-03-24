@@ -216,6 +216,8 @@ function renderCardList(cardListNumber) {
     })
 
     const cards = document.querySelectorAll('.memory-card');
+    
+    
 
     setTimeout(() => {
         cards.forEach((cards) => {
@@ -242,7 +244,6 @@ function renderCardList(cardListNumber) {
           secondCard = this;
       
           checkForMatch();
-          WinGame();
         }
       
         function checkForMatch() {
@@ -280,8 +281,6 @@ function renderCardList(cardListNumber) {
       
         cards.forEach(card => card.addEventListener('click', flipCard));
       }, 5000);
-
- 
 }
 
 const shuffle = (array) => {
