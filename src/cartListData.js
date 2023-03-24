@@ -75,7 +75,7 @@ function renderCardList(cardListNumber) {
         {
             id: 'hearts-j',
             name: 'hearts j',
-            image: './img/jc.png',
+            image: 'img/jc.png',
         },
         {
             id: 'hearts-q',
@@ -227,12 +227,13 @@ function renderCardList(cardListNumber) {
         let firstCard, secondCard;
       
         function flipCard() {
-          if (lockBoard) return;
-         if (this === firstCard) return;
+             
+        if (lockBoard) return;
+        if (this === firstCard) return;
       
-          this.classList.add('flip');
+            this.classList.add('flip');
       
-          if (!hasFlippedCard) {
+        if (!hasFlippedCard) {
             hasFlippedCard = true;
             firstCard = this;
             return;
@@ -241,6 +242,7 @@ function renderCardList(cardListNumber) {
           secondCard = this;
       
           checkForMatch();
+          WinGame();
         }
       
         function checkForMatch() {
@@ -252,26 +254,29 @@ function renderCardList(cardListNumber) {
           firstCard.removeEventListener('click', flipCard);
           secondCard.removeEventListener('click', flipCard);
       
-         resetBoard();
+          resetBoard();
         }
       
         function unflipCards() {
           lockBoard = true;
       
           setTimeout(() => {
+            
             firstCard.classList.remove('flip');
             secondCard.classList.remove('flip');
-            console.log('you lose')
+            alert('Вы проиграли')
+            lockBoard = true;
             
-           resetBoard();
           }, 1500);
+
+          
         }
       
        function resetBoard() {
          [hasFlippedCard, lockBoard] = [false, false];
          [firstCard, secondCard] = [null, null];
-         
        }
+
       
         cards.forEach(card => card.addEventListener('click', flipCard));
       }, 5000);
