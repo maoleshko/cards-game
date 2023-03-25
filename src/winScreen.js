@@ -16,7 +16,7 @@ function renderWinBlock(container) {
 
     const buttonRestart = document.createElement('button')
     buttonRestart.classList.add('button-restart', 'button')
-    buttonRestart.textContent = 'Играть снова'
+    buttonRestart.textContent = ('Играть снова')
     
     div.appendChild(title)
     div.appendChild(label)
