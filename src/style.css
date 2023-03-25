@@ -22,11 +22,11 @@ body {
     align-items: center;
     justify-content: center;
     background: #004980;
+    font-family: StratosSkyeng;
 }
 
 .app {
     margin: auto;
-    font-family: StratosSkyeng;
     display: flex;
     box-sizing: border-box;
     gap: 40px;
@@ -39,8 +39,9 @@ body {
     flex-direction: column;
     padding: 50px 50px 70px 70px;
     border-radius: 8px;
-    align-items: center;
+    text-align: center;
 }
+
 .hide {
     display: none;
 }
@@ -65,9 +66,11 @@ body {
     height: 100px;
     width: 100px;
 }
+
 .input[type='radio'] {
     display: none;
 }
+
 .button-label {
     font-size: 64px;
     cursor: pointer;
@@ -111,8 +114,8 @@ body {
     padding: 2px;
     color: #fff;
     font-size: 24px;
-    font-family: StratosSkyeng;
 }
+
 .cards_container {
     width: 650px;
     height: 650px;
@@ -129,15 +132,17 @@ body {
     height: 120px;
     margin: 5px;
     position: relative;
-    box-shadow: 1px 1px 1px rgba(0,0,0,.3);
+    box-shadow: 1px 1px 1px rgba (0, 0, 0, .3);
     transform: scale(1);
     transform-style: preserve-3d;
     transition: transform .5s;
-} 
+}
+
 .memory-card:active {
     transform: scale(0.97);
     transition: transform .2s;
 }
+
 .memory-card.flip {
     transform: rotateY(180deg);
 }
@@ -151,9 +156,10 @@ body {
     background: #1C7CCC;
     backface-visibility: hidden;
 }
+
 .front-face {
     transform: rotateY(180deg);
-  }
+}
 
 .game-menu {
     width: 100%;
@@ -162,11 +168,29 @@ body {
     justify-content: space-between;
     padding-right: 50px;
 }
+
 .timer {
     color: #fff;
-    font-family: StratosSkyeng;
     font-size: 64px;
 }
+
 .card-back {
     background-image: url(https://phonoteka.org/uploads/posts/2021-11/1635890690_3-phonoteka-org-p-fon-dlya-rubashki-kart-krasivie-3.png)
+}
+
+.result {
+    margin: auto;
+    display: flex;
+    box-sizing: border-box;
+    gap: 40px;
+    margin-top: 100px;
+    width: 480px;
+    background: #c2f5ff;
+    border: none;
+    color: #004980;
+    align-items: center;
+    flex-direction: column;
+    padding: 50px 50px 70px 70px;
+    border-radius: 8px;
+    align-items: center;
 }
