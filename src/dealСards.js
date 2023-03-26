@@ -1,5 +1,5 @@
-
-function renderPlayBlock(container) {
+export function renderPlayBlock(container) {
+    document.body.innerHTML = "";
     const div = document.createElement('div')
     div.classList.add('game-menu')
     const h1 = document.createElement('h1')
@@ -12,31 +12,16 @@ function renderPlayBlock(container) {
 
     div.appendChild(h1)
     div.appendChild(resetButton)
-    container.appendChild(div) 
-
-     
+    container.appendChild(div)     
 }
 
 window.application.blocks['play'] = renderPlayBlock
 
-function renderCardListBlock(container) {
-    
-   
-    
-}
-
-window.application.blocks['cardList'] = renderCardListBlock
-
-function renderPlayScreen() {
-    
+export function renderPlayScreen() {
+    const div = document.createElement('div');
+    div.classList.add('content'); 
     window.application.renderBlock('play', div);
-    window.application.renderBlock('cardList', div);
-
     document.body.appendChild(div)    
 }
 
 window.application.screens['play'] = renderPlayScreen
-
-// window.application.renderScreen('play');
-
-

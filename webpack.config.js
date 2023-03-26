@@ -4,11 +4,12 @@ const CopyPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
-const isProduction = process.env.NODE_ENV === "production";
+// const isProduction = process.env.NODE_ENV === "production";
+// mode: isProduction ? "production" : "development",
 
 module.exports = {
   entry: './src/index.js',
-  mode: isProduction ? "production" : "development",
+  mode: "development",
   module: {
     rules: [
       { 

@@ -1,187 +1,187 @@
-function renderCardList(cardListNumber) {
-    const cards_container = document.querySelector('.cards_container')
+export function renderCardList(cardListNumber) {
+    const cards_container = document.querySelector('.container')
 
     const cardListData = [
         {
             id: 'spades-6',
             name: 'spades 6',
-            image: './img/6p.png',
+            image: './static/img/6p.png',
         },
         {
             id: 'spades-7',
             name: 'spades 7',
-            image: './img/7p.png',
+            image: './static/img/7p.png',
         },
         {
             id: 'spades-8',
             name: 'spades 8',
-            image: './img/8p.png',
+            image: './static/img/8p.png',
         },
         {
             id: 'spades-9',
             name: 'spades 9',
-            image: './img/9p.png',
+            image: './static/img/9p.png',
         },
         {
             id: 'spades-10',
             name: 'spades 10',
-            image: './img/10p.png',
+            image: './static/img/10p.png',
         },
         {
             id: 'spades-j',
             name: 'spades j',
-            image: './img/jp.png',
+            image: './static/img/jp.png',
         },
         {
             id: 'spades-q',
             name: 'spades q',
-            image: './img/qp.png',
+            image: './static/img/qp.png',
         },
         {
             id: 'spades-k',
             name: 'spades k',
-            image: './img/kp.png',
+            image: './static/img/kp.png',
         },
         {
             id: 'spades-a',
             name: 'spades a',
-            image: './img/ap.png',
+            image: './static/img/ap.png',
         },
         {
             id: 'hearts-6',
             name: 'hearts 6',
-            image: './img/6c.png',
+            image: './static/img/6c.png',
         },
         {
             id: 'hearts-7',
             name: 'hearts 7',
-            image: './img/7c.png',
+            image: './static/img/7c.png',
         },
         {
             id: 'hearts-8',
             name: 'hearts 8',
-            image: './img/8c.png',
+            image: './static/img/8c.png',
         },
         {
             id: 'hearts-9',
             name: 'hearts 9',
-            image: './img/9c.png',
+            image: './static/img/9c.png',
         },
         {
             id: 'hearts-10',
             name: 'hearts 10',
-            image: './img/10c.png',
+            image: './static/img/10c.png',
         },
         {
             id: 'hearts-j',
             name: 'hearts j',
-            image: 'img/jc.png',
+            image: './static/img/jc.png',
         },
         {
             id: 'hearts-q',
             name: 'hearts q',
-            image: './img/qc.png',
+            image: './static/img/qc.png',
         },
         {
             id: 'hearts-k',
             name: 'hearts k',
-            image: './img/kc.png',
+            image: './static/img/kc.png',
         },
         {
             id: 'hearts-a',
             name: 'hearts a',
-            image: './img/ac.png',
+            image: './static/img/ac.png',
         },
 
         {
             id: 'diamonds-6',
             name: 'diamonds 6',
-            image: './img/6b.png',
+            image: './static/img/6b.png',
         },
         {
             id: 'diamonds-7',
             name: 'diamonds 7',
-            image: './img/7b.png',
+            image: './static/img/7b.png',
         },
         {
             id: 'diamonds-8',
             name: 'diamonds 8',
-            image: './img/8b.png',
+            image: './static/img/8b.png',
         },
         {
             id: 'diamonds-9',
             name: 'diamonds 9',
-            image: './img/9b.png',
+            image: './static/img/9b.png',
         },
         {
             id: 'diamonds-10',
             name: 'diamonds 10',
-            image: './img/10b.png',
+            image: './static/img/10b.png',
         },
         {
             id: 'diamonds-j',
             name: 'diamonds j',
-            image: './img/jb.png',
+            image: './static/img/jb.png',
         },
         {
             id: 'diamonds-q',
             name: 'diamonds q',
-            image: './img/qb.png',
+            image: './static/img/qb.png',
         },
         {
             id: 'diamonds-k',
             name: 'diamonds k',
-            image: './img/kb.png',
+            image: './static/img/kb.png',
         },
         {
             id: 'diamonds-a',
             name: 'diamonds a',
-            image: './img/ab.png',
+            image: './static/img/ab.png',
         },
         {
             id: 'clubs-6',
             name: 'clubs 6',
-            image: './img/6k.png',
+            image: './static/img/6k.png',
         },
         {
             id: 'clubs-7',
             name: 'clubs 7',
-            image: './img/7k.png',
+            image: './static/img/7k.png',
         },
         {
             id: 'clubs-8',
             name: 'clubs 8',
-            image: './img/8k.png',
+            image: './static/img/8k.png',
         },
         {
             id: 'clubs-9',
             name: 'clubs 9',
-            image: './img/9k.png',
+            image: './static/img/9k.png',
         },
         {
             id: 'clubs-10',
             name: 'clubs 10',
-            image: './img/10k.png',
+            image: './static/img/10k.png',
         },
         {
             id: 'clubs-j',
             name: 'clubs j',
-            image: './img/jk.png',
+            image: './static/img/jk.png',
         },
         {
             id: 'clubs-q',
             name: 'clubs q',
-            image: './img/qk.png',
+            image: './static/img/qk.png',
         },
         {
             id: 'clubs-k',
             name: 'clubs k',
-            image: './img/kk.png',
+            image: './static/img/kk.png',
         },
         {
             id: 'clubs-a',
             name: 'clubs a',
-            image: './img/ak.png',
+            image: './static/img/ak.png',
         }
     ]
 
@@ -283,7 +283,7 @@ function renderCardList(cardListNumber) {
       }, 5000);
 }
 
-const shuffle = (array) => {
+export const shuffle = (array) => {
     let currentIndex = array.length,
         randomIndex;
     while (currentIndex !== 0) {
@@ -297,6 +297,6 @@ const shuffle = (array) => {
     return array;
 };
 
-const duplicateArray = (array) =>
+export const duplicateArray = (array) =>
     array.reduce((res, current) => res.concat([current, current]), []);
 

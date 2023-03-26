@@ -2,17 +2,17 @@
     margin: 0;
 }
 
-@font-face {
+/* @font-face {
     font-family: StratosSkyeng;
-    src: url(/fonts/statosskyeng-v1.001/Web\ fonts/stratosskyengweb-regular.woff)
-            format(woff),
-        url(/fonts/statosskyeng-v1.001/Web\ fonts/stratosskyengweb-regular.woff2)
-            format(woff2);
+    src: url(../../static/fonts/stratosskyeng-regular.woff),
+        format(woff);
+    src: url(../../static/fonts/stratosskyeng-regular.woff2),
+        format(woff2);    
     font-weight: 400;
     font-style: normal;
     font-stretch: normal;
     font-variant: normal;
-}
+} */
 
 body {
     width: 100vw;
@@ -22,7 +22,6 @@ body {
     align-items: center;
     justify-content: center;
     background: #004980;
-    font-family: StratosSkyeng;
 }
 
 .app {
@@ -74,7 +73,7 @@ body {
 .button-label {
     font-size: 64px;
     cursor: pointer;
-    padding: 0px 15px;
+    padding: 1px 15px;
     line-height: 34px;
     border: 1px solid #999;
     border-radius: 6px;
@@ -116,7 +115,7 @@ body {
     font-size: 24px;
 }
 
-.cards_container {
+.container {
     width: 650px;
     height: 650px;
     display: flex;
@@ -132,15 +131,15 @@ body {
     height: 120px;
     margin: 5px;
     position: relative;
-    box-shadow: 1px 1px 1px rgba (0, 0, 0, .3);
+    box-shadow: 1px 1px 1px rgba (0, 0, 0, 0.3);
     transform: scale(1);
     transform-style: preserve-3d;
-    transition: transform .5s;
+    transition: transform 0.5s;
 }
 
 .memory-card:active {
     transform: scale(0.97);
-    transition: transform .2s;
+    transition: transform 0.2s;
 }
 
 .memory-card.flip {
@@ -153,7 +152,7 @@ body {
     height: 100%;
     position: absolute;
     border-radius: 5px;
-    background: #1C7CCC;
+    background: blue;
     backface-visibility: hidden;
 }
 
@@ -174,10 +173,6 @@ body {
     font-size: 64px;
 }
 
-.card-back {
-    background-image: url(https://phonoteka.org/uploads/posts/2021-11/1635890690_3-phonoteka-org-p-fon-dlya-rubashki-kart-krasivie-3.png)
-}
-
 .result {
     margin: auto;
     display: flex;
@@ -192,5 +187,4 @@ body {
     flex-direction: column;
     padding: 50px 50px 70px 70px;
     border-radius: 8px;
-    align-items: center;
 }
