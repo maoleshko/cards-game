@@ -1,7 +1,4 @@
-import { diffSelection } from './diff-selection';
-
-
-export function renderBlockChoice(levelContent) {
+function renderBlockChoice(levelContent) {
     const buttonName = [1, 2, 3]
     buttonName.forEach((elements) => {
         const buttonLevels = document.createElement('input')
@@ -16,12 +13,19 @@ export function renderBlockChoice(levelContent) {
         buttonLabel.classList.add('button-label')
         buttonLabel.textContent = elements
 
+        const buttonStart = document.createElement('button')
+        buttonStart.classList.add('button-start', 'button')
+        buttonStart.textContent = 'Старт'
+
+        startButton.addEventListener('click', gameStart)
+       
         levelContent.appendChild(buttonLevels)
         levelContent.appendChild(buttonLabel)
+        levelContent.appendChild(buttonStart)
     })
 }
 
-export function renderScreenChoice() {
+function renderScreenChoice() {
     const APP_CONTAINER = document.querySelector('.app')
     const title = document.createElement('h1')
     title.classList.add('title')
@@ -29,13 +33,11 @@ export function renderScreenChoice() {
 
     const levelContent = document.createElement('div')
     levelContent.classList.add('level-content')
-    const buttonStart = document.createElement('button')
-    buttonStart.classList.add('button-start', 'button')
-    buttonStart.textContent = 'Старт'
+    
     
 
     window.application.renderBlock('blockChoice', levelContent)
     APP_CONTAINER.appendChild(title)
     APP_CONTAINER.appendChild(levelContent)
-    APP_CONTAINER.appendChild(buttonStart)
+    
 }

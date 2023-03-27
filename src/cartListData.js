@@ -1,4 +1,4 @@
-export function renderCardList(cardListNumber) {
+function renderCardList(cardListNumber) {
     const cards_container = document.querySelector('.container')
 
     const cardListData = [
@@ -203,7 +203,7 @@ export function renderCardList(cardListNumber) {
         imgElement.setAttribute('class', 'front-face')
         cardElement.setAttribute('data-framework', `${card.name}`)
         const imgElementBack = document.createElement('img')
-        imgElementBack.setAttribute('src', './img/back.png')
+        imgElementBack.setAttribute('src', './static/img/back.png')
         imgElementBack.setAttribute('alt', 'backSide')
         imgElementBack.setAttribute('class', 'back-face')
         // Добавляем элемент в div с классом card
@@ -283,7 +283,7 @@ export function renderCardList(cardListNumber) {
       }, 5000);
 }
 
-export const shuffle = (array) => {
+const shuffle = (array) => {
     let currentIndex = array.length,
         randomIndex;
     while (currentIndex !== 0) {
@@ -297,6 +297,6 @@ export const shuffle = (array) => {
     return array;
 };
 
-export const duplicateArray = (array) =>
+const duplicateArray = (array) =>
     array.reduce((res, current) => res.concat([current, current]), []);
 

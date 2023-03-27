@@ -2,17 +2,17 @@
     margin: 0;
 }
 
-/* @font-face {
+@font-face {
     font-family: StratosSkyeng;
-    src: url(../../static/fonts/stratosskyeng-regular.woff),
-        format(woff);
-    src: url(../../static/fonts/stratosskyeng-regular.woff2),
-        format(woff2);    
+    src: local("'StratosSkyeng'"),
+        url("'../static/fonts/stratosskyengweb-regular.woff'") format("'woff'"),
+        url("'../static/fonts/stratosskyengweb-regular.woff2'")
+            format("'woff2'");
     font-weight: 400;
     font-style: normal;
     font-stretch: normal;
     font-variant: normal;
-} */
+}
 
 body {
     width: 100vw;
@@ -22,6 +22,7 @@ body {
     align-items: center;
     justify-content: center;
     background: #004980;
+    font-family: StratosSkyeng, sans-serif;
 }
 
 .app {
@@ -38,7 +39,6 @@ body {
     flex-direction: column;
     padding: 50px 50px 70px 70px;
     border-radius: 8px;
-    text-align: center;
 }
 
 .hide {
@@ -131,7 +131,7 @@ body {
     height: 120px;
     margin: 5px;
     position: relative;
-    box-shadow: 1px 1px 1px rgba (0, 0, 0, 0.3);
+    box-shadow: 1px 1px 1px (0, 0, 0, 30%);
     transform: scale(1);
     transform-style: preserve-3d;
     transition: transform 0.5s;
@@ -152,7 +152,7 @@ body {
     height: 100%;
     position: absolute;
     border-radius: 5px;
-    background: blue;
+    background: #1c7ccc;
     backface-visibility: hidden;
 }
 

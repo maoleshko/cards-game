@@ -1,4 +1,5 @@
-export function renderPlayBlock(container) {
+
+function renderPlayBlock(container) {
     document.body.innerHTML = "";
     const div = document.createElement('div')
     div.classList.add('game-menu')
@@ -17,7 +18,7 @@ export function renderPlayBlock(container) {
 
 window.application.blocks['play'] = renderPlayBlock
 
-export function renderPlayScreen() {
+function renderPlayScreen() {
     const div = document.createElement('div');
     div.classList.add('content'); 
     window.application.renderBlock('play', div);
@@ -25,3 +26,6 @@ export function renderPlayScreen() {
 }
 
 window.application.screens['play'] = renderPlayScreen
+
+
+
