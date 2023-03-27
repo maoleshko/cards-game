@@ -1,4 +1,18 @@
-export function renderCardList(cardListNumber) {
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./src/cartListData.js":
+/*!*****************************!*\
+  !*** ./src/cartListData.js ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "renderCardList": () => (/* binding */ renderCardList)
+/* harmony export */ });
+function renderCardList(cardListNumber) {
     const cards_container = document.querySelector('.container')
 
     const cardListData = [
@@ -298,3 +312,180 @@ const shuffle = (array) => {
 const duplicateArray = (array) =>
     array.reduce((res, current) => res.concat([current, current]), []);
 
+
+
+/***/ }),
+
+/***/ "./src/mainScreen.js":
+/*!***************************!*\
+  !*** ./src/mainScreen.js ***!
+  \***************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "renderBlockChoice": () => (/* binding */ renderBlockChoice),
+/* harmony export */   "renderScreenChoice": () => (/* binding */ renderScreenChoice)
+/* harmony export */ });
+/* harmony import */ var _cartListData__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./cartListData */ "./src/cartListData.js");
+
+
+function renderBlockChoice(levelContent) {
+    const buttonName = [1, 2, 3]
+    buttonName.forEach((elements) => {
+        const buttonLevels = document.createElement('input')
+        buttonLevels.setAttribute('type', 'radio')
+        buttonLevels.setAttribute('value', elements)
+        buttonLevels.setAttribute('id', elements)
+        buttonLevels.setAttribute('name', 'group-button')
+        buttonLevels.classList.add('input', 'button')
+
+        const buttonLabel = document.createElement('label')
+        buttonLabel.setAttribute('for', elements)
+        buttonLabel.classList.add('button-label')
+        buttonLabel.textContent = elements
+ 
+        levelContent.appendChild(buttonLevels)
+        levelContent.appendChild(buttonLabel)
+        
+    })
+}
+
+function renderScreenChoice() {
+    const APP_CONTAINER = document.querySelector('.app')
+    const title = document.createElement('h1')
+    title.classList.add('title')
+    title.textContent = 'Выбери сложность'
+
+    const levelContent = document.createElement('div')
+    levelContent.classList.add('level-content')
+
+    const ButtonStart = document.createElement('button')
+    ButtonStart.classList.add('button-start', 'button')
+    ButtonStart.textContent = 'Старт'
+    ButtonStart.addEventListener('click', gameStart)
+    
+    APP_CONTAINER.appendChild(title)
+    window.application.renderBlock('blockChoice', levelContent)
+    APP_CONTAINER.appendChild(levelContent)
+    APP_CONTAINER.appendChild(ButtonStart)
+    
+}
+
+function gameStart() {
+        const APP_CONTAINER = document.querySelector('.app')
+        const button = document.querySelectorAll('.button')
+        const ButtonStart = document.querySelector('.button-start')
+    for (const control of button) {
+        if (control.checked === true) {
+            window.application.levels = control.value
+            APP_CONTAINER.innerHTML = ''
+            APP_CONTAINER.classList.add('hide')
+            switch (window.application.levels) {
+                case '1':
+                    ;(0,_cartListData__WEBPACK_IMPORTED_MODULE_0__.renderCardList)(3)
+                    break
+                case '2':
+                    ;(0,_cartListData__WEBPACK_IMPORTED_MODULE_0__.renderCardList)(12)
+                    break
+                case '3':
+                    ;(0,_cartListData__WEBPACK_IMPORTED_MODULE_0__.renderCardList)(18)
+                    break
+                default:
+                    break
+            }
+        }
+    }
+}
+
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+(() => {
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _mainScreen__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./mainScreen */ "./src/mainScreen.js");
+// import './src/css/style.css';
+
+
+
+window.application = {
+    blocks: {},
+    screens: {},
+    renderScreen: function (screenName) {
+        this.screens[screenName]()
+    },
+    renderBlock: function (blockName, container) {
+        this.blocks[blockName](container)
+    },
+    levels: [],
+}
+
+window.application.blocks['blockChoice'] = _mainScreen__WEBPACK_IMPORTED_MODULE_0__.renderBlockChoice
+window.application.screens['screenChoice'] = _mainScreen__WEBPACK_IMPORTED_MODULE_0__.renderScreenChoice
+window.application.renderScreen('screenChoice')
+})();
+
+/******/ })()
+;
+//# sourceMappingURL=bundle.js.map
