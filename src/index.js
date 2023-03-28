@@ -1,6 +1,5 @@
-import './src/css/style.css';
-import { renderBlockChoice,renderScreenChoice } from './mainScreen';
-
+import './css/style.css'
+import { renderBlockChoice, renderScreenChoice } from './mainScreen.js'
 
 window.application = {
     blocks: {},

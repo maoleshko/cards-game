@@ -1,6 +1,6 @@
 // Игровое поле с таймером и кнопкой
 function renderPlayBlock(container) {
-    document.body.innerHTML = "";
+    document.body.innerHTML = ''
     const div = document.createElement('div')
     div.classList.add('game-menu')
     const h1 = document.createElement('h1')
@@ -13,23 +13,22 @@ function renderPlayBlock(container) {
 
     div.appendChild(h1)
     div.appendChild(resetButton)
-    container.appendChild(div)     
+    container.appendChild(div)
 }
 
 window.application.blocks['play'] = renderPlayBlock
 
 function renderPlayScreen() {
-    const div = document.createElement('div');
-    div.classList.add('content'); 
-    window.application.renderBlock('play', div);
-    document.body.appendChild(div)    
+    const div = document.createElement('div')
+    div.classList.add('content')
+    window.application.renderBlock('play', div)
+    document.body.appendChild(div)
 }
 
 window.application.screens['play'] = renderPlayScreen
 
 function renderLoseBlock(container) {
-    
-    document.body.innerHTML = "";
+    document.body.innerHTML = ''
     const div = document.createElement('div')
     div.classList.add('result')
 
@@ -46,23 +45,20 @@ function renderLoseBlock(container) {
     const buttonRestart = document.createElement('button')
     buttonRestart.classList.add('button-restart', 'button')
     buttonRestart.textContent = 'Играть снова'
-    
+
     div.appendChild(title)
     div.appendChild(label)
     div.appendChild(buttonRestart)
-    container.appendChild(div) 
-
-     
+    container.appendChild(div)
 }
 
 window.application.blocks['lose'] = renderLoseBlock
 // Экран проигрыша
 function renderLoseScreen() {
-    
-    const div = document.createElement('div');
-    div.classList.add('content');
-    window.application.renderBlock('lose', div);
-    document.body.appendChild(div)    
+    const div = document.createElement('div')
+    div.classList.add('content')
+    window.application.renderBlock('lose', div)
+    document.body.appendChild(div)
 }
 
 window.application.screens['lose'] = renderLoseScreen
@@ -71,8 +67,7 @@ window.application.screens['lose'] = renderLoseScreen
 
 // Экран победы
 function renderWinBlock(container) {
-    
-    document.body.innerHTML = "";
+    document.body.innerHTML = ''
     const div = document.createElement('div')
     div.classList.add('result')
 
@@ -88,24 +83,21 @@ function renderWinBlock(container) {
 
     const buttonRestart = document.createElement('button')
     buttonRestart.classList.add('button-restart', 'button')
-    buttonRestart.textContent = ('Играть снова')
-    
+    buttonRestart.textContent = 'Играть снова'
+
     div.appendChild(title)
     div.appendChild(label)
     div.appendChild(buttonRestart)
-    container.appendChild(div) 
-
-     
+    container.appendChild(div)
 }
 
 window.application.blocks['win'] = renderWinBlock
 
 function renderWinScreen() {
-   
-    const div = document.createElement('div');
-    div.classList.add('content');
-    window.application.renderBlock('win', div);
-    document.body.appendChild(div)    
+    const div = document.createElement('div')
+    div.classList.add('content')
+    window.application.renderBlock('win', div)
+    document.body.appendChild(div)
 }
 
 window.application.screens['win'] = renderWinScreen

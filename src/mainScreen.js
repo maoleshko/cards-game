@@ -1,4 +1,4 @@
-import { renderCardList } from './cartListData';
+import { renderCardList } from './cartListData.js'
 
 export function renderBlockChoice(levelContent) {
     const buttonName = [1, 2, 3]
@@ -14,10 +14,9 @@ export function renderBlockChoice(levelContent) {
         buttonLabel.setAttribute('for', elements)
         buttonLabel.classList.add('button-label')
         buttonLabel.textContent = elements
- 
+
         levelContent.appendChild(buttonLevels)
         levelContent.appendChild(buttonLabel)
-        
     })
 }
 
@@ -34,18 +33,16 @@ export function renderScreenChoice() {
     ButtonStart.classList.add('button-start', 'button')
     ButtonStart.textContent = 'Старт'
     ButtonStart.addEventListener('click', gameStart)
-    
+
     APP_CONTAINER.appendChild(title)
     window.application.renderBlock('blockChoice', levelContent)
     APP_CONTAINER.appendChild(levelContent)
     APP_CONTAINER.appendChild(ButtonStart)
-    
 }
 
 function gameStart() {
-        const APP_CONTAINER = document.querySelector('.app')
-        const button = document.querySelectorAll('.button')
-        const ButtonStart = document.querySelector('.button-start')
+    const APP_CONTAINER = document.querySelector('.app')
+    const button = document.querySelectorAll('.button')
     for (const control of button) {
         if (control.checked === true) {
             window.application.levels = control.value
