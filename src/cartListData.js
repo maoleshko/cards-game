@@ -1,4 +1,18 @@
+import { renderLoseScreen } from './mainScreen'
+
 export function renderCardList(cardListNumber) {
+    const gameMenu = document.querySelector('.game-menu')
+    //timer
+    const h2 = document.createElement('h2')
+    h2.textContent = '00:00'
+    h2.classList.add('timer')
+
+    const reloadButton = document.createElement('button')
+    reloadButton.textContent = 'Начать заново'
+    reloadButton.classList.add('button', 'btn-reload')
+    gameMenu.appendChild(h2)
+    gameMenu.appendChild(reloadButton)
+
     const cardsСontainer = document.querySelector('.container')
 
     const cardListData = [
@@ -262,8 +276,7 @@ export function renderCardList(cardListNumber) {
             setTimeout(() => {
                 firstCard.classList.remove('flip')
                 secondCard.classList.remove('flip')
-                alert('Вы проиграли')
-                lockBoard = true
+                renderLoseScreen()
             }, 1500)
         }
 

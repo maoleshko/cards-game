@@ -16,3 +16,9 @@ window.application = {
 window.application.blocks['blockChoice'] = renderBlockChoice
 window.application.screens['screenChoice'] = renderScreenChoice
 window.application.renderScreen('screenChoice')
+
+export function resetGame() {
+    const app = document.querySelector('.app')
+    app.innerHTML = ''
+    window.application.renderScreen('screenChoice')
+}

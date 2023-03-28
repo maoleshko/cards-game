@@ -24,7 +24,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "renderCardList": () => (/* binding */ renderCardList)
 /* harmony export */ });
+/* harmony import */ var _mainScreen__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./mainScreen */ "./src/mainScreen.js");
+
+
 function renderCardList(cardListNumber) {
+    const gameMenu = document.querySelector('.game-menu')
+    //timer
+    const h2 = document.createElement('h2')
+    h2.textContent = '00:00'
+    h2.classList.add('timer')
+
+    const reloadButton = document.createElement('button')
+    reloadButton.textContent = 'Начать заново'
+    reloadButton.classList.add('button', 'btn-reload')
+    gameMenu.appendChild(h2)
+    gameMenu.appendChild(reloadButton)
+
     const cardsСontainer = document.querySelector('.container')
 
     const cardListData = [
@@ -288,8 +303,7 @@ function renderCardList(cardListNumber) {
             setTimeout(() => {
                 firstCard.classList.remove('flip')
                 secondCard.classList.remove('flip')
-                alert('Вы проиграли')
-                lockBoard = true
+                ;(0,_mainScreen__WEBPACK_IMPORTED_MODULE_0__.renderLoseScreen)()
             }, 1500)
         }
 
@@ -322,6 +336,46 @@ const duplicateArray = (array) =>
 
 /***/ }),
 
+/***/ "./src/index.js":
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "resetGame": () => (/* binding */ resetGame)
+/* harmony export */ });
+/* harmony import */ var _css_style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./css/style.css */ "./src/css/style.css");
+/* harmony import */ var _mainScreen__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./mainScreen */ "./src/mainScreen.js");
+
+
+
+window.application = {
+    blocks: {},
+    screens: {},
+    renderScreen: function (screenName) {
+        this.screens[screenName]()
+    },
+    renderBlock: function (blockName, container) {
+        this.blocks[blockName](container)
+    },
+    levels: [],
+}
+
+window.application.blocks['blockChoice'] = _mainScreen__WEBPACK_IMPORTED_MODULE_1__.renderBlockChoice
+window.application.screens['screenChoice'] = _mainScreen__WEBPACK_IMPORTED_MODULE_1__.renderScreenChoice
+window.application.renderScreen('screenChoice')
+
+function resetGame() {
+    const app = document.querySelector('.app')
+    app.innerHTML = ''
+    window.application.renderScreen('screenChoice')
+}
+
+
+/***/ }),
+
 /***/ "./src/mainScreen.js":
 /*!***************************!*\
   !*** ./src/mainScreen.js ***!
@@ -331,9 +385,13 @@ const duplicateArray = (array) =>
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "renderBlockChoice": () => (/* binding */ renderBlockChoice),
-/* harmony export */   "renderScreenChoice": () => (/* binding */ renderScreenChoice)
+/* harmony export */   "renderLoseScreen": () => (/* binding */ renderLoseScreen),
+/* harmony export */   "renderScreenChoice": () => (/* binding */ renderScreenChoice),
+/* harmony export */   "renderWinScreen": () => (/* binding */ renderWinScreen)
 /* harmony export */ });
 /* harmony import */ var _cartListData__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./cartListData */ "./src/cartListData.js");
+/* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index */ "./src/index.js");
+
 
 
 function renderBlockChoice(levelContent) {
@@ -345,12 +403,10 @@ function renderBlockChoice(levelContent) {
         buttonLevels.setAttribute('id', elements)
         buttonLevels.setAttribute('name', 'group-button')
         buttonLevels.classList.add('input', 'button')
-
         const buttonLabel = document.createElement('label')
         buttonLabel.setAttribute('for', elements)
         buttonLabel.classList.add('button-label')
         buttonLabel.textContent = elements
-
         levelContent.appendChild(buttonLevels)
         levelContent.appendChild(buttonLabel)
     })
@@ -361,15 +417,12 @@ function renderScreenChoice() {
     const title = document.createElement('h1')
     title.classList.add('title')
     title.textContent = 'Выбери сложность'
-
     const levelContent = document.createElement('div')
     levelContent.classList.add('level-content')
-
     const ButtonStart = document.createElement('button')
     ButtonStart.classList.add('button-start', 'button')
     ButtonStart.textContent = 'Старт'
     ButtonStart.addEventListener('click', gameStart)
-
     APP_CONTAINER.appendChild(title)
     window.application.renderBlock('blockChoice', levelContent)
     APP_CONTAINER.appendChild(levelContent)
@@ -389,16 +442,68 @@ function gameStart() {
                     ;(0,_cartListData__WEBPACK_IMPORTED_MODULE_0__.renderCardList)(3)
                     break
                 case '2':
-                    ;(0,_cartListData__WEBPACK_IMPORTED_MODULE_0__.renderCardList)(12)
+                    ;(0,_cartListData__WEBPACK_IMPORTED_MODULE_0__.renderCardList)(6)
                     break
                 case '3':
-                    ;(0,_cartListData__WEBPACK_IMPORTED_MODULE_0__.renderCardList)(18)
+                    ;(0,_cartListData__WEBPACK_IMPORTED_MODULE_0__.renderCardList)(9)
                     break
                 default:
                     break
             }
         }
     }
+}
+
+function renderLoseScreen() {
+    document.body.innerHTML = ''
+    const div = document.createElement('div')
+    div.classList.add('app')
+
+    const title = document.createElement('h1')
+    title.classList.add('title')
+    title.textContent = 'Вы проиграли!'
+
+    const label = document.createElement('h2')
+    label.classList.add('timeLabel')
+    label.textContent = 'Затраченное время:'
+
+    //timer
+
+    const buttonRestart = document.createElement('button')
+    buttonRestart.classList.add('button-restart', 'button')
+    buttonRestart.textContent = 'Играть снова'
+    buttonRestart.addEventListener('click', _index__WEBPACK_IMPORTED_MODULE_1__.resetGame)
+
+    document.body.appendChild(div)
+    div.appendChild(title)
+    div.appendChild(label)
+    div.appendChild(buttonRestart)
+}
+
+function renderWinScreen() {
+    document.body.innerHTML = ''
+    const div = document.createElement('div')
+    div.classList.add('app')
+
+    const title = document.createElement('h1')
+    title.classList.add('title')
+    title.textContent = 'Вы победили!'
+
+    const label = document.createElement('h2')
+    label.classList.add('timeLabel')
+    label.textContent = 'Затраченное время:'
+
+    //timer
+
+    const buttonRestart = document.createElement('button')
+    buttonRestart.classList.add('button-restart', 'button')
+    buttonRestart.textContent = 'Играть снова'
+    buttonRestart.addEventListener('click', _index__WEBPACK_IMPORTED_MODULE_1__.resetGame)
+
+    document.body.appendChild(div)
+    div.appendChild(title)
+    div.appendChild(label)
+    div.appendChild(buttonRestart)
 }
 
 
@@ -460,36 +565,12 @@ function gameStart() {
 /******/ 	})();
 /******/ 	
 /************************************************************************/
-var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
-(() => {
-/*!**********************!*\
-  !*** ./src/index.js ***!
-  \**********************/
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _css_style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./css/style.css */ "./src/css/style.css");
-/* harmony import */ var _mainScreen__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./mainScreen */ "./src/mainScreen.js");
-
-
-
-window.application = {
-    blocks: {},
-    screens: {},
-    renderScreen: function (screenName) {
-        this.screens[screenName]()
-    },
-    renderBlock: function (blockName, container) {
-        this.blocks[blockName](container)
-    },
-    levels: [],
-}
-
-window.application.blocks['blockChoice'] = _mainScreen__WEBPACK_IMPORTED_MODULE_1__.renderBlockChoice
-window.application.screens['screenChoice'] = _mainScreen__WEBPACK_IMPORTED_MODULE_1__.renderScreenChoice
-window.application.renderScreen('screenChoice')
-
-})();
-
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module is referenced by other modules so it can't be inlined
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/index.js");
+/******/ 	
 /******/ })()
 ;
 //# sourceMappingURL=bundle.js.map

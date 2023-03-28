@@ -1,3 +1,4 @@
+/* stylelint-disable prettier/prettier */
 * {
     margin: 0;
 }
@@ -19,7 +20,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     background: #004980;
     font-family: StratosSkyeng, sans-serif;
 }
@@ -42,6 +42,7 @@ body {
 
 .hide {
     display: none;
+    width: 2px;
 }
 
 .title {
@@ -116,13 +117,13 @@ body {
 
 .container {
     width: 650px;
-    height: 650px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     padding-left: 15px;
     padding-right: 15px;
     perspective: 1000px;
+    align-content: center;
 }
 
 .memory-card {
@@ -160,11 +161,11 @@ body {
 }
 
 .game-menu {
-    width: 100%;
+    width: 1024px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-right: 50px;
+    padding: 45px 45px 25px 25px;
 }
 
 .timer {
