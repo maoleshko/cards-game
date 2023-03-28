@@ -1,4 +1,4 @@
-// import './src/css/style.css';
+import './src/css/style.css';
 import { renderBlockChoice,renderScreenChoice } from './mainScreen';
 
 

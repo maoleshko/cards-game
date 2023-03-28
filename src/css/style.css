@@ -5,9 +5,8 @@
 @font-face {
     font-family: StratosSkyeng;
     src: local("'StratosSkyeng'"),
-        url("'../static/fonts/stratosskyengweb-regular.woff'") format("'woff'"),
-        url("'../static/fonts/stratosskyengweb-regular.woff2'")
-            format("'woff2'");
+        url('../../static/fonts/stratosskyengweb-regular.woff') format('woff'),
+        url('../../static/fonts/stratosskyengweb-regular.woff2') format('woff2');
     font-weight: 400;
     font-style: normal;
     font-stretch: normal;
