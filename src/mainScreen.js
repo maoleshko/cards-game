@@ -1,4 +1,4 @@
-import { renderCardList } from './cartListData.js'
+import { renderCardList } from './cartListData'
 
 export function renderBlockChoice(levelContent) {
     const buttonName = [1, 2, 3]
