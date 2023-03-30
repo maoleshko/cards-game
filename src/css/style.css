@@ -164,7 +164,7 @@ body {
     width: 1024px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     padding: 45px 45px 25px 25px;
 }
 
@@ -188,8 +188,12 @@ body {
     align-items: flex-end;
 }
 
-.timerLabel {
-    font-size: 16px;
+.label {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    justify-content: flex-start;
+    font-size: 64px;
 }
 
 .timemin, .timesec {

@@ -62,9 +62,16 @@ function gameStart() {
 }
 
 export function renderLoseScreen() {
-    document.body.innerHTML = ''
-    const div = document.createElement('div')
-    div.classList.add('app')
+    const min = document.querySelector('.timemin').textContent
+    const sec = document.querySelector('.timesec').textContent
+    window.application.time = min + '.' + sec
+    const gameMenu = document.querySelector('.game-menu')
+    gameMenu.textContent = ''
+    const gamecontainer = document.querySelector('.container')
+    gamecontainer.textContent = ''
+    const APP_CONTAINER = document.querySelector('.app')
+    APP_CONTAINER.innerHTML = ''
+    window.application.levels = ''
 
     const title = document.createElement('h1')
     title.classList.add('title')
@@ -72,23 +79,26 @@ export function renderLoseScreen() {
 
     const label = document.createElement('h2')
     label.classList.add('timeLabel')
-    label.textContent = 'Затраченное время:'
+    label.textContent = 'Затраченное время:' + window.application.time
 
-    //timer
+    window.application.stopInterval()
 
     const buttonRestart = document.createElement('button')
     buttonRestart.classList.add('button-restart', 'button')
     buttonRestart.textContent = 'Играть снова'
     buttonRestart.addEventListener('click', resetGame)
 
-    document.body.appendChild(div)
-    div.appendChild(title)
-    div.appendChild(label)
-    div.appendChild(buttonRestart)
+    APP_CONTAINER.classList.remove('hide')
+    APP_CONTAINER.appendChild(title)
+    APP_CONTAINER.appendChild(label)
+
+    APP_CONTAINER.appendChild(buttonRestart)
 }
 
 export function renderWinScreen() {
-    document.body.innerHTML = ''
+    const APP_CONTAINER = document.querySelector('.app')
+    APP_CONTAINER.innerHTML = ''
+    window.application.levels = ''
     const div = document.createElement('div')
     div.classList.add('app')
 
@@ -100,7 +110,7 @@ export function renderWinScreen() {
     label.classList.add('timeLabel')
     label.textContent = 'Затраченное время:'
 
-    //timer
+    window.application.stopInterval()
 
     const buttonRestart = document.createElement('button')
     buttonRestart.classList.add('button-restart', 'button')

@@ -1,16 +1,23 @@
 import { renderLoseScreen } from './mainScreen'
 import { renderWinScreen } from './mainScreen'
+import { tryAgain } from './index'
 
 export function renderCardList(cardListNumber) {
     const gameMenu = document.querySelector('.game-menu')
-    // const timeBoard = document.querySelector('.timeBoard')
-    const min = document.querySelector('.min')
-    const sec = document.querySelector('.sec')
+    const timeBoard = document.createElement('div')
+    timeBoard.classList.add('timeBoard')
+    const label = document.createElement('div')
+    label.classList.add('label')
+    const min = document.createElement('div')
+    min.classList.add('min')
+    const sec = document.createElement('div')
+    sec.classList.add('sec')
     const timeLabelmin = document.createElement('timeLabel')
     timeLabelmin.classList.add('timer')
     timeLabelmin.textContent = 'min'
+    label.textContent = '.'
     const timeLabelsec = document.createElement('timeLabel')
-    timeLabelsec.classList.add('timer')
+    timeLabelsec.classList.add('timeLabel')
     timeLabelsec.textContent = 'sec'
     const timemin = document.createElement('h2')
     timemin.classList.add('timemin')
@@ -21,27 +28,17 @@ export function renderCardList(cardListNumber) {
     const reloadButton = document.createElement('button')
     reloadButton.textContent = 'Начать заново'
     reloadButton.classList.add('button', 'btn-reload')
+    gameMenu.appendChild(timeBoard)
+    timeBoard.appendChild(min)
+    timeBoard.appendChild(label)
+    timeBoard.appendChild(sec)
     min.appendChild(timeLabelmin)
     sec.appendChild(timeLabelsec)
     min.appendChild(timemin)
     sec.appendChild(timesec)
     gameMenu.appendChild(reloadButton)
-
-    let secs = 0
-    let mins = 0
-
-    let id = setInterval(function () {
-        secs++
-        if (secs === 60) {
-            // clearInterval(id)
-            secs = 0
-            mins++
-        }
-        timemin.textContent = mins < 10 ? '0' + mins : mins
-        timesec.textContent = secs < 10 ? '0' + secs : secs
-        console.log(id)
-    }, 1000)
-    // reloadButton.addEventListener('click', reload())
+    timer()
+    reloadButton.addEventListener('click', tryAgain)
     const cardsСontainer = document.querySelector('.container')
 
     const cardListData = [
@@ -313,7 +310,6 @@ export function renderCardList(cardListNumber) {
             firstCard.classList.remove('flip')
             secondCard.classList.remove('flip')
             renderLoseScreen()
-            clearInterval(id)
         }, 1500)
     }
 
@@ -341,3 +337,22 @@ const shuffle = (array) => {
 
 const duplicateArray = (array) =>
     array.reduce((res, current) => res.concat([current, current]), [])
+
+function timer() {
+    let secs = 0
+    let mins = 0
+    const timemin = document.querySelector('.timemin')
+    const timesec = document.querySelector('.timesec')
+
+    const gameTime = setInterval(function () {
+        secs++
+        if (secs === 60) {
+            secs = 0
+            mins++
+        }
+        timemin.textContent = mins < 10 ? '0' + mins : mins
+        timesec.textContent = secs < 10 ? '0' + secs : secs
+        console.log(gameTime)
+    }, 1000)
+    window.application.timers.push(gameTime)
+}
