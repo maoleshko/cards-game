@@ -1,18 +1,47 @@
 import { renderLoseScreen } from './mainScreen'
+import { renderWinScreen } from './mainScreen'
 
 export function renderCardList(cardListNumber) {
     const gameMenu = document.querySelector('.game-menu')
-    //timer
-    const h2 = document.createElement('h2')
-    h2.textContent = '00:00'
-    h2.classList.add('timer')
-
+    // const timeBoard = document.querySelector('.timeBoard')
+    const min = document.querySelector('.min')
+    const sec = document.querySelector('.sec')
+    const timeLabelmin = document.createElement('timeLabel')
+    timeLabelmin.classList.add('timer')
+    timeLabelmin.textContent = 'min'
+    const timeLabelsec = document.createElement('timeLabel')
+    timeLabelsec.classList.add('timer')
+    timeLabelsec.textContent = 'sec'
+    const timemin = document.createElement('h2')
+    timemin.classList.add('timemin')
+    timemin.textContent = '00'
+    const timesec = document.createElement('h2')
+    timesec.classList.add('timesec')
+    timesec.textContent = '00'
     const reloadButton = document.createElement('button')
     reloadButton.textContent = 'Начать заново'
     reloadButton.classList.add('button', 'btn-reload')
-    gameMenu.appendChild(h2)
+    min.appendChild(timeLabelmin)
+    sec.appendChild(timeLabelsec)
+    min.appendChild(timemin)
+    sec.appendChild(timesec)
     gameMenu.appendChild(reloadButton)
 
+    let secs = 0
+    let mins = 0
+
+    let id = setInterval(function () {
+        secs++
+        if (secs === 60) {
+            // clearInterval(id)
+            secs = 0
+            mins++
+        }
+        timemin.textContent = mins < 10 ? '0' + mins : mins
+        timesec.textContent = secs < 10 ? '0' + secs : secs
+        console.log(id)
+    }, 1000)
+    // reloadButton.addEventListener('click', reload())
     const cardsСontainer = document.querySelector('.container')
 
     const cardListData = [
@@ -228,65 +257,72 @@ export function renderCardList(cardListNumber) {
         // Добавляем элемент div с классом card на освной экран с контейнер
         cardsСontainer.appendChild(cardElement)
     })
-
     const cards = document.querySelectorAll('.memory-card')
 
     setTimeout(() => {
         cards.forEach((cards) => {
             cards.classList.remove('flip')
         })
-
-        let hasFlippedCard = false
-        let lockBoard = false
-        let firstCard, secondCard
-
-        function flipCard() {
-            if (lockBoard) return
-            if (this === firstCard) return
-
-            this.classList.add('flip')
-
-            if (!hasFlippedCard) {
-                hasFlippedCard = true
-                firstCard = this
-                return
-            }
-
-            secondCard = this
-
-            checkForMatch()
-        }
-
-        function checkForMatch() {
-            let isMatch =
-                firstCard.dataset.framework === secondCard.dataset.framework
-            isMatch ? disableCards() : unflipCards()
-        }
-
-        function disableCards() {
-            firstCard.removeEventListener('click', flipCard)
-            secondCard.removeEventListener('click', flipCard)
-
-            resetBoard()
-        }
-
-        function unflipCards() {
-            lockBoard = true
-
-            setTimeout(() => {
-                firstCard.classList.remove('flip')
-                secondCard.classList.remove('flip')
-                renderLoseScreen()
-            }, 1500)
-        }
-
-        function resetBoard() {
-            ;[hasFlippedCard, lockBoard] = [false, false]
-            ;[firstCard, secondCard] = [null, null]
-        }
-
-        cards.forEach((card) => card.addEventListener('click', flipCard))
     }, 1000)
+
+    let hasFlippedCard = false
+    let lockBoard = false
+    let firstCard, secondCard
+    let couple = 0
+
+    function flipCard() {
+        if (lockBoard) return
+        if (this === firstCard) return
+
+        this.classList.add('flip')
+
+        if (!hasFlippedCard) {
+            hasFlippedCard = true
+            firstCard = this
+            return
+        }
+
+        secondCard = this
+
+        checkForMatch()
+    }
+
+    function checkForMatch() {
+        let isMatch =
+            firstCard.dataset.framework === secondCard.dataset.framework
+        isMatch ? disableCards() : unflipCards()
+        couple++
+        if (couple === cardListNumber) {
+            setTimeout(() => {
+                renderWinScreen()
+            }, 1000)
+        }
+    }
+
+    function disableCards() {
+        firstCard.removeEventListener('click', flipCard)
+        secondCard.removeEventListener('click', flipCard)
+
+        resetBoard()
+    }
+
+    function unflipCards() {
+        lockBoard = true
+
+        setTimeout(() => {
+            firstCard.classList.remove('flip')
+            secondCard.classList.remove('flip')
+            renderLoseScreen()
+            clearInterval(id)
+        }, 1500)
+    }
+
+    function resetBoard() {
+        ;[hasFlippedCard, lockBoard] = [false, false]
+        ;[firstCard, secondCard] = [null, null]
+    }
+
+    cards.forEach((card) => card.addEventListener('click', flipCard))
 }
 
 const shuffle = (array) => {

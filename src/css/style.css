@@ -164,12 +164,28 @@ body {
     width: 1024px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     padding: 45px 45px 25px 25px;
 }
 
-.timer {
+.timeBoard {
     color: #fff;
+    width: 155px;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.timer {
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.timerLabel {
+    font-size: 16px;
+}
+
+.timemin, .timesec {
     font-size: 64px;
 }
 
