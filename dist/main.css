@@ -1,3 +1,6 @@
+/*!*********************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/css/style.css ***!
+  \*********************************************************************/
 /* stylelint-disable prettier/prettier */
 * {
     margin: 0;
@@ -6,8 +9,8 @@
 @font-face {
     font-family: StratosSkyeng;
     src: local("'StratosSkyeng'"),
-        url('../../static/fonts/stratosskyengweb-regular.woff') format('woff'),
-        url('../../static/fonts/stratosskyengweb-regular.woff2') format('woff2');
+        url(d7d99bd522cf2d77ce4a.woff) format('woff'),
+        url(ce93393e831d32412096.woff2) format('woff2');
     font-weight: 400;
     font-style: normal;
     font-stretch: normal;
@@ -164,35 +167,12 @@ body {
     width: 1024px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     padding: 45px 45px 25px 25px;
 }
 
-.timeBoard {
-    color: #fff;
-    width: 155px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
 .timer {
-    font-size: 16px;
-    display: flex;
-    justify-content: space-between;
-}
-
-.min, .sec {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-}
-
-.timerLabel {
-    font-size: 16px;
-}
-
-.timemin, .timesec {
+    color: #fff;
     font-size: 64px;
 }
 
@@ -211,3 +191,6 @@ body {
     padding: 50px 50px 70px 70px;
     border-radius: 8px;
 }
+
+
+/*# sourceMappingURL=main.css.map*/

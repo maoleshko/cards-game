@@ -1,5 +1,48 @@
+import { renderLoseScreen } from './mainScreen'
+import { renderWinScreen } from './mainScreen'
+
 export function renderCardList(cardListNumber) {
-    const cards_container = document.querySelector('.container')
+    const gameMenu = document.querySelector('.game-menu')
+    // const timeBoard = document.querySelector('.timeBoard')
+    const min = document.querySelector('.min')
+    const sec = document.querySelector('.sec')
+    const timeLabelmin = document.createElement('timeLabel')
+    timeLabelmin.classList.add('timer')
+    timeLabelmin.textContent = 'min'
+    const timeLabelsec = document.createElement('timeLabel')
+    timeLabelsec.classList.add('timer')
+    timeLabelsec.textContent = 'sec'
+    const timemin = document.createElement('h2')
+    timemin.classList.add('timemin')
+    timemin.textContent = '00'
+    const timesec = document.createElement('h2')
+    timesec.classList.add('timesec')
+    timesec.textContent = '00'
+    const reloadButton = document.createElement('button')
+    reloadButton.textContent = 'Начать заново'
+    reloadButton.classList.add('button', 'btn-reload')
+    min.appendChild(timeLabelmin)
+    sec.appendChild(timeLabelsec)
+    min.appendChild(timemin)
+    sec.appendChild(timesec)
+    gameMenu.appendChild(reloadButton)
+
+    let secs = 0
+    let mins = 0
+
+    let id = setInterval(function () {
+        secs++
+        if (secs === 60) {
+            // clearInterval(id)
+            secs = 0
+            mins++
+        }
+        timemin.textContent = mins < 10 ? '0' + mins : mins
+        timesec.textContent = secs < 10 ? '0' + secs : secs
+        console.log(id)
+    }, 1000)
+    // reloadButton.addEventListener('click', reload())
+    const cardsСontainer = document.querySelector('.container')
 
     const cardListData = [
         {
@@ -182,15 +225,15 @@ export function renderCardList(cardListNumber) {
             id: 'clubs-a',
             name: 'clubs a',
             image: './static/img/ak.png',
-        }
+        },
     ]
 
-    shuffle(cardListData);
-// Возвращаем новый массив элементов, который будет содержать от 0 до указанного количества карт
+    shuffle(cardListData)
+    // Возвращаем новый массив элементов, который будет содержать от 0 до указанного количества карт
     const cardList = cardListData.slice(0, cardListNumber)
-    const duplicateCardsArray = duplicateArray(cardList); 
-    shuffle(duplicateCardsArray);
-    // Для каждого элемента массива будет создан div 
+    const duplicateCardsArray = duplicateArray(cardList)
+    shuffle(duplicateCardsArray)
+    // Для каждого элемента массива будет создан div
     duplicateCardsArray.forEach((card) => {
         const cardElement = document.createElement('div')
         cardElement.classList.add('memory-card')
@@ -203,100 +246,98 @@ export function renderCardList(cardListNumber) {
         imgElement.setAttribute('class', 'front-face')
         cardElement.setAttribute('data-framework', `${card.name}`)
         const imgElementBack = document.createElement('img')
-        imgElementBack.setAttribute('src', './img/back.png')
+        imgElementBack.setAttribute('src', './static/img/back.png')
         imgElementBack.setAttribute('alt', 'backSide')
         imgElementBack.setAttribute('class', 'back-face')
         // Добавляем элемент в div с классом card
-        
+
         cardElement.appendChild(imgElement)
         cardElement.appendChild(imgElementBack)
-       
-        // Добавляем элемент div с классом card на освной экран с контейнер
-        cards_container.appendChild(cardElement)
-    })
 
-    const cards = document.querySelectorAll('.memory-card');
-    
-    
+        // Добавляем элемент div с классом card на освной экран с контейнер
+        cardsСontainer.appendChild(cardElement)
+    })
+    const cards = document.querySelectorAll('.memory-card')
 
     setTimeout(() => {
         cards.forEach((cards) => {
             cards.classList.remove('flip')
         })
+    }, 1000)
 
-        let hasFlippedCard = false;
-        let lockBoard = false;
-        let firstCard, secondCard;
-      
-        function flipCard() {
-             
-        if (lockBoard) return;
-        if (this === firstCard) return;
-      
-            this.classList.add('flip');
-      
+    let hasFlippedCard = false
+    let lockBoard = false
+    let firstCard, secondCard
+    let couple = 0
+
+    function flipCard() {
+        if (lockBoard) return
+        if (this === firstCard) return
+
+        this.classList.add('flip')
+
         if (!hasFlippedCard) {
-            hasFlippedCard = true;
-            firstCard = this;
-            return;
-          }
-      
-          secondCard = this;
-      
-          checkForMatch();
+            hasFlippedCard = true
+            firstCard = this
+            return
         }
-      
-        function checkForMatch() {
-          let isMatch = firstCard.dataset.framework === secondCard.dataset.framework;
-          isMatch ? disableCards() : unflipCards();
-        }
-      
-        function disableCards() {
-          firstCard.removeEventListener('click', flipCard);
-          secondCard.removeEventListener('click', flipCard);
-      
-          resetBoard();
-        }
-      
-        function unflipCards() {
-          lockBoard = true;
-      
-          setTimeout(() => {
-            
-            firstCard.classList.remove('flip');
-            secondCard.classList.remove('flip');
-            alert('Вы проиграли')
-            lockBoard = true;
-            
-          }, 1500);
 
-          
-        }
-      
-       function resetBoard() {
-         [hasFlippedCard, lockBoard] = [false, false];
-         [firstCard, secondCard] = [null, null];
-       }
+        secondCard = this
 
-      
-        cards.forEach(card => card.addEventListener('click', flipCard));
-      }, 5000);
+        checkForMatch()
+    }
+
+    function checkForMatch() {
+        let isMatch =
+            firstCard.dataset.framework === secondCard.dataset.framework
+        isMatch ? disableCards() : unflipCards()
+        couple++
+        if (couple === cardListNumber) {
+            setTimeout(() => {
+                renderWinScreen()
+            }, 1000)
+        }
+    }
+
+    function disableCards() {
+        firstCard.removeEventListener('click', flipCard)
+        secondCard.removeEventListener('click', flipCard)
+
+        resetBoard()
+    }
+
+    function unflipCards() {
+        lockBoard = true
+
+        setTimeout(() => {
+            firstCard.classList.remove('flip')
+            secondCard.classList.remove('flip')
+            renderLoseScreen()
+            clearInterval(id)
+        }, 1500)
+    }
+
+    function resetBoard() {
+        ;[hasFlippedCard, lockBoard] = [false, false]
+        ;[firstCard, secondCard] = [null, null]
+    }
+
+    cards.forEach((card) => card.addEventListener('click', flipCard))
 }
 
-export const shuffle = (array) => {
+const shuffle = (array) => {
     let currentIndex = array.length,
-        randomIndex;
+        randomIndex
     while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex--;
-        [array[currentIndex], array[randomIndex]] = [
+        randomIndex = Math.floor(Math.random() * currentIndex)
+        currentIndex--
+        ;[array[currentIndex], array[randomIndex]] = [
             array[randomIndex],
             array[currentIndex],
-        ];
+        ]
     }
-    return array;
-};
+    return array
+}
 
-export const duplicateArray = (array) =>
-    array.reduce((res, current) => res.concat([current, current]), []);
-
+const duplicateArray = (array) =>
+    array.reduce((res, current) => res.concat([current, current]), [])
