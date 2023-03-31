@@ -28,7 +28,7 @@ body {
     margin: auto;
     display: flex;
     box-sizing: border-box;
-    gap: 40px;
+    gap: 10px;
     margin-top: 100px;
     width: 480px;
     background: #c2f5ff;
@@ -48,16 +48,18 @@ body {
 .title {
     font-size: 40px;
     text-align: center;
+    padding-bottom: 40px;
 }
 
 .level-content {
     display: flex;
     flex-direction: row;
-    gap: 10px;
+    gap: 25px;
     width: 100%;
     justify-content: center;
     align-items: center;
     height: 100px;
+    padding-bottom: 60px;
 }
 
 .input {
@@ -164,7 +166,7 @@ body {
     width: 1024px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     padding: 45px 45px 25px 25px;
 }
 
@@ -188,8 +190,12 @@ body {
     align-items: flex-end;
 }
 
-.timerLabel {
-    font-size: 16px;
+.label {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    justify-content: flex-start;
+    font-size: 64px;
 }
 
 .timemin, .timesec {
@@ -210,4 +216,20 @@ body {
     flex-direction: column;
     padding: 50px 50px 70px 70px;
     border-radius: 8px;
+}
+
+.emojiImage{
+    width: 96px;
+    height: 96px;
+}
+
+.timeRoundLabel {
+    color: #000;
+    font-size: 24px;
+}
+
+.timeRound {
+    color: #000;
+    font-size: 64px;
+    padding-bottom: 40px;
 }

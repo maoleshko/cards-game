@@ -1,6 +1,6 @@
-import { renderCardList } from './cartListData'
-import { resetGame } from './index'
+import { gameStart } from './gameStart'
 
+// Экран выбора сложности игры
 export function renderBlockChoice(levelContent) {
     const buttonName = [1, 2, 3]
     buttonName.forEach((elements) => {
@@ -34,81 +34,4 @@ export function renderScreenChoice() {
     window.application.renderBlock('blockChoice', levelContent)
     APP_CONTAINER.appendChild(levelContent)
     APP_CONTAINER.appendChild(ButtonStart)
-}
-
-function gameStart() {
-    const APP_CONTAINER = document.querySelector('.app')
-    const button = document.querySelectorAll('.button')
-    for (const control of button) {
-        if (control.checked === true) {
-            window.application.levels = control.value
-            APP_CONTAINER.innerHTML = ''
-            APP_CONTAINER.classList.add('hide')
-            switch (window.application.levels) {
-                case '1':
-                    renderCardList(3)
-                    break
-                case '2':
-                    renderCardList(6)
-                    break
-                case '3':
-                    renderCardList(9)
-                    break
-                default:
-                    break
-            }
-        }
-    }
-}
-
-export function renderLoseScreen() {
-    document.body.innerHTML = ''
-    const div = document.createElement('div')
-    div.classList.add('app')
-
-    const title = document.createElement('h1')
-    title.classList.add('title')
-    title.textContent = 'Вы проиграли!'
-
-    const label = document.createElement('h2')
-    label.classList.add('timeLabel')
-    label.textContent = 'Затраченное время:'
-
-    //timer
-
-    const buttonRestart = document.createElement('button')
-    buttonRestart.classList.add('button-restart', 'button')
-    buttonRestart.textContent = 'Играть снова'
-    buttonRestart.addEventListener('click', resetGame)
-
-    document.body.appendChild(div)
-    div.appendChild(title)
-    div.appendChild(label)
-    div.appendChild(buttonRestart)
-}
-
-export function renderWinScreen() {
-    document.body.innerHTML = ''
-    const div = document.createElement('div')
-    div.classList.add('app')
-
-    const title = document.createElement('h1')
-    title.classList.add('title')
-    title.textContent = 'Вы победили!'
-
-    const label = document.createElement('h2')
-    label.classList.add('timeLabel')
-    label.textContent = 'Затраченное время:'
-
-    //timer
-
-    const buttonRestart = document.createElement('button')
-    buttonRestart.classList.add('button-restart', 'button')
-    buttonRestart.textContent = 'Играть снова'
-    buttonRestart.addEventListener('click', resetGame)
-
-    document.body.appendChild(div)
-    div.appendChild(title)
-    div.appendChild(label)
-    div.appendChild(buttonRestart)
 }
