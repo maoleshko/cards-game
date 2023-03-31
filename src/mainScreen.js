@@ -1,6 +1,6 @@
-import { renderCardList } from './cartListData'
-import { resetGame } from './index'
+import { gameStart } from './gameStart'
 
+// Экран выбора сложности игры
 export function renderBlockChoice(levelContent) {
     const buttonName = [1, 2, 3]
     buttonName.forEach((elements) => {
@@ -34,91 +34,4 @@ export function renderScreenChoice() {
     window.application.renderBlock('blockChoice', levelContent)
     APP_CONTAINER.appendChild(levelContent)
     APP_CONTAINER.appendChild(ButtonStart)
-}
-
-function gameStart() {
-    const APP_CONTAINER = document.querySelector('.app')
-    const button = document.querySelectorAll('.button')
-    for (const control of button) {
-        if (control.checked === true) {
-            window.application.levels = control.value
-            APP_CONTAINER.innerHTML = ''
-            APP_CONTAINER.classList.add('hide')
-            switch (window.application.levels) {
-                case '1':
-                    renderCardList(3)
-                    break
-                case '2':
-                    renderCardList(6)
-                    break
-                case '3':
-                    renderCardList(9)
-                    break
-                default:
-                    break
-            }
-        }
-    }
-}
-
-export function renderLoseScreen() {
-    const min = document.querySelector('.timemin').textContent
-    const sec = document.querySelector('.timesec').textContent
-    window.application.time = min + '.' + sec
-    const gameMenu = document.querySelector('.game-menu')
-    gameMenu.textContent = ''
-    const gamecontainer = document.querySelector('.container')
-    gamecontainer.textContent = ''
-    const APP_CONTAINER = document.querySelector('.app')
-    APP_CONTAINER.innerHTML = ''
-    window.application.levels = ''
-
-    const title = document.createElement('h1')
-    title.classList.add('title')
-    title.textContent = 'Вы проиграли!'
-
-    const label = document.createElement('h2')
-    label.classList.add('timeLabel')
-    label.textContent = 'Затраченное время:' + window.application.time
-
-    window.application.stopInterval()
-
-    const buttonRestart = document.createElement('button')
-    buttonRestart.classList.add('button-restart', 'button')
-    buttonRestart.textContent = 'Играть снова'
-    buttonRestart.addEventListener('click', resetGame)
-
-    APP_CONTAINER.classList.remove('hide')
-    APP_CONTAINER.appendChild(title)
-    APP_CONTAINER.appendChild(label)
-
-    APP_CONTAINER.appendChild(buttonRestart)
-}
-
-export function renderWinScreen() {
-    const APP_CONTAINER = document.querySelector('.app')
-    APP_CONTAINER.innerHTML = ''
-    window.application.levels = ''
-    const div = document.createElement('div')
-    div.classList.add('app')
-
-    const title = document.createElement('h1')
-    title.classList.add('title')
-    title.textContent = 'Вы победили!'
-
-    const label = document.createElement('h2')
-    label.classList.add('timeLabel')
-    label.textContent = 'Затраченное время:'
-
-    window.application.stopInterval()
-
-    const buttonRestart = document.createElement('button')
-    buttonRestart.classList.add('button-restart', 'button')
-    buttonRestart.textContent = 'Играть снова'
-    buttonRestart.addEventListener('click', resetGame)
-
-    document.body.appendChild(div)
-    div.appendChild(title)
-    div.appendChild(label)
-    div.appendChild(buttonRestart)
 }
