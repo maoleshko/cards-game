@@ -2,12 +2,11 @@ import { renderEndScreen } from './endGameScreen'
 import { tryAgain } from './reloadGame'
 import { timer } from './timer'
 import { shuffle, duplicateArray } from './cardsRandom'
-import { number, string } from 'yargs'
 
-interface cardListData {
-    img: string
-    data: string
-    image: string
+interface CardDeck {
+    id: String
+    name: String
+    image: String
 }
 
 //Главный игровой экран с полем карт и игровой логикой
@@ -221,7 +220,12 @@ export function renderCardList(cardListNumber: number) {
     const reloadButton = document.createElement('button')
     reloadButton.textContent = 'Начать заново'
     reloadButton.classList.add('button', 'btn-reload')
-    gameMenu.appendChild(timeBoard)
+    if (gameMenu !== null) {
+        gameMenu.appendChild(timeBoard)
+        gameMenu.appendChild(reloadButton)
+      } else {
+        console.warn ('error')
+      }
     timeBoard.appendChild(min)
     timeBoard.appendChild(label)
     timeBoard.appendChild(sec)
@@ -229,21 +233,27 @@ export function renderCardList(cardListNumber: number) {
     sec.appendChild(timeLabelsec)
     min.appendChild(timemin)
     sec.appendChild(timesec)
-    gameMenu.appendChild(reloadButton)
+    
     timer()
     reloadButton.addEventListener('click', tryAgain)
-    const cardsСontainer = document.querySelector('.container') as Element
-
+    const cardsСontainer = document.querySelector('.container') as HTMLElement
+    interface Card {
+        image: string
+        name: string
+        class: string
+        'data-framework': string
+    }
     shuffle(cardListData)
     // Возвращаем новый массив элементов, который будет содержать от 0 до указанного количества карт
     const cardList = cardListData.slice(0, cardListNumber)
     const duplicateCardsArray = duplicateArray(cardList)
     shuffle(duplicateCardsArray)
     // Для каждого элемента массива будет создан div
-    duplicateCardsArray.forEach((card) => {
+    duplicateCardsArray.forEach((card: Card) => {
         const cardElement = document.createElement('div')
         cardElement.classList.add('memory-card')
         cardElement.classList.add('flip')
+        
         //Создаем элемент img и указываем атрибуты
         const imgElement = document.createElement('img')
         //Задаем атрибуты для игоровой карточки
@@ -273,7 +283,8 @@ export function renderCardList(cardListNumber: number) {
 
     let hasFlippedCard = false
     let lockBoard = false
-    let firstCard, secondCard
+    let firstCard: string | null
+    let secondCard: string | null
     let couple: number = 0
 
     function flipCard() {
@@ -294,9 +305,16 @@ export function renderCardList(cardListNumber: number) {
     }
 
     function checkForMatch() {
-        let isMatch =
-            firstCard.dataset.framework === secondCard.dataset.framework
-        isMatch ? disableCards() : unflipCards()
+        if (firstCard.dataset.framework === secondCard.dataset.framework) {
+            disableCards();
+            return;
+          }
+          unflipCards();
+        // let firsMark: string = firstCard.dataset.framework
+        // let secondMark: string = secondCard.dataset.framework
+        // let isMatch =
+        // firsMark === secondMark
+        // isMatch ? disableCards() : unflipCards()
         couple++
         if (couple === cardListNumber) {
             setTimeout(() => {
@@ -307,7 +325,7 @@ export function renderCardList(cardListNumber: number) {
 
     function disableCards() {
         firstCard.removeEventListener('click', flipCard)
-        secondCard.removeEventListener('click', flipCard)
+        secondCard.removeEventListener('click', flipCard) 
 
         resetBoard()
     }

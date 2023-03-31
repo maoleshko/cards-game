@@ -2,7 +2,7 @@ import { gameStart } from './gameStart'
 
 // Экран выбора сложности игры
 export function renderBlockChoice(levelContent: Element): void {
-    const buttonName = [1, 2, 3]
+    const buttonName = ['1', '2', '3']
     buttonName.forEach((elements) =>{
         const buttonLevels = document.createElement('input')
         buttonLevels.setAttribute('type', 'radio')

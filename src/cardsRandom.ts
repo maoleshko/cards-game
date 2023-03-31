@@ -13,5 +13,5 @@ export const shuffle = (array: string[]) => {
     return array
 }
 
-export const duplicateArray = (array) =>
+export const duplicateArray = (array: array<cardListData>) =>
     array.reduce((res, current) => res.concat([current, current]), [])

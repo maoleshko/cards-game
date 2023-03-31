@@ -12,9 +12,9 @@ declare global {
             }
             renderBlock: (blockName: string, container: HTMLElement) => void
             renderScreen: (screenName: string) => void
-            levels: []
-            timers: [],
-            time: string | [] | NodeJS.Timer
+            levels: String | []
+            timers: NodeJS.Timer [],
+            time: string | []
             stopInterval: () => void
         }
     }
@@ -32,7 +32,7 @@ window.application = {
     levels: [],
     timers: [],
     stopInterval: function () {
-        this.timers.forEach((timer: string) => {
+        this.timers.forEach((timer: NodeJS.Timer) => {
             clearInterval(timer)
         })
     },
