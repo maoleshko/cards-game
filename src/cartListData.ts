@@ -1,8 +1,14 @@
 import { renderEndScreen } from './endGameScreen'
 import { tryAgain } from './reloadGame'
 import { timer } from './timer'
-import { shuffle } from './cardsRandom'
-import { duplicateArray } from './cardsRandom'
+import { shuffle, duplicateArray } from './cardsRandom'
+import { number, string } from 'yargs'
+
+interface cardListData {
+    img: string
+    data: string
+    image: string
+}
 
 //Главный игровой экран с полем карт и игровой логикой
 const cardListData = [
@@ -189,7 +195,7 @@ const cardListData = [
     },
 ]
 
-export function renderCardList(cardListNumber) {
+export function renderCardList(cardListNumber: number) {
     const gameMenu = document.querySelector('.game-menu')
     const timeBoard = document.createElement('div')
     timeBoard.classList.add('timeBoard')
@@ -226,7 +232,7 @@ export function renderCardList(cardListNumber) {
     gameMenu.appendChild(reloadButton)
     timer()
     reloadButton.addEventListener('click', tryAgain)
-    const cardsСontainer = document.querySelector('.container')
+    const cardsСontainer = document.querySelector('.container') as Element
 
     shuffle(cardListData)
     // Возвращаем новый массив элементов, который будет содержать от 0 до указанного количества карт
@@ -268,7 +274,7 @@ export function renderCardList(cardListNumber) {
     let hasFlippedCard = false
     let lockBoard = false
     let firstCard, secondCard
-    let couple = 0
+    let couple: number = 0
 
     function flipCard() {
         if (lockBoard) return

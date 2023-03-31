@@ -1,12 +1,12 @@
 import { renderCardList } from './cartListData'
 
 // Кнопка "Старт " при выборе уровня сложности
-export function gameStart() {
-    const APP_CONTAINER = document.querySelector('.app')
+export function gameStart(): void {
+    const APP_CONTAINER = document.querySelector('.app') as HTMLElement
     const button = document.querySelectorAll('.button')
     for (const control of button) {
-        if (control.checked === true) {
-            window.application.levels = control.value
+        if ((control as HTMLInputElement).checked === true) {
+            window.application.levels = (control as HTMLInputElement).value
             APP_CONTAINER.innerHTML = ''
             APP_CONTAINER.classList.add('hide')
             switch (window.application.levels) {

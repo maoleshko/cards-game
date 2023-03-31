@@ -1,9 +1,9 @@
 import { gameStart } from './gameStart'
 
 // Экран выбора сложности игры
-export function renderBlockChoice(levelContent) {
+export function renderBlockChoice(levelContent: Element): void {
     const buttonName = [1, 2, 3]
-    buttonName.forEach((elements) => {
+    buttonName.forEach((elements) =>{
         const buttonLevels = document.createElement('input')
         buttonLevels.setAttribute('type', 'radio')
         buttonLevels.setAttribute('value', elements)
@@ -20,7 +20,7 @@ export function renderBlockChoice(levelContent) {
 }
 
 export function renderScreenChoice() {
-    const APP_CONTAINER = document.querySelector('.app')
+    const APP_CONTAINER = document.querySelector('.app') as Element
     const title = document.createElement('h1')
     title.classList.add('title')
     title.textContent = 'Выбери сложность'

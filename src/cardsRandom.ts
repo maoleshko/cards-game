@@ -1,5 +1,5 @@
 // Методы для перемешивания карт
-export const shuffle = (array) => {
+export const shuffle = (array: string[]) => {
     let currentIndex = array.length,
         randomIndex
     while (currentIndex !== 0) {
