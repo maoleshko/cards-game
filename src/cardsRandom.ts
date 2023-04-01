@@ -19,5 +19,12 @@ export const shuffle = (array:cardList[]) => {
     return array
 }
 
-export const duplicateArray = (array:cardList[]) => [...array, ...array]
-    array.reduce((res:string , current:string ) => res.concat([current, current]), [])
+interface MyInterface {
+    type: string;
+  }
+  let array:MyInterface[] = [];
+
+export const duplicateArray = (array: cardList[]): cardList[] => {
+    const duplicated = [...array, ...array];
+    return duplicated.reduce((res: cardList[], current: cardList) => res.concat([current, current]), []);
+  }

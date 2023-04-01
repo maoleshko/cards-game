@@ -3,9 +3,8 @@ import { tryAgain } from './reloadGame'
 import { timer } from './timer'
 import { shuffle, duplicateArray } from './cardsRandom'
 
-
 //Главный игровой экран с полем карт и игровой логикой
-const cardListData:{
+const cardListData: {
     id: string
     name: string
     image: string
@@ -236,11 +235,11 @@ export function renderCardList(cardListNumber: number) {
     timer()
     reloadButton.addEventListener('click', tryAgain)
     const cardsСontainer = document.querySelector('.container') as HTMLElement
-    
+
     shuffle(cardListData)
     // Возвращаем новый массив элементов, который будет содержать от 0 до указанного количества карт
     const cardList = cardListData.slice(0, cardListNumber)
-       
+
     const duplicateCardsArray = duplicateArray(cardList)
 
     shuffle(duplicateCardsArray)
@@ -250,7 +249,7 @@ export function renderCardList(cardListNumber: number) {
         const cardElement = document.createElement('div')
         cardElement.classList.add('memory-card')
         cardElement.classList.add('flip')
-       
+
         //Создаем элемент img и указываем атрибуты
         const imgElement = document.createElement('img') as HTMLImageElement
         //Задаем атрибуты для игоровой карточки
@@ -278,25 +277,29 @@ export function renderCardList(cardListNumber: number) {
         })
     }, 1000)
 
-    let hasFlippedCard = false
-    let lockBoard = false
-    let firstCard: string | null
-    let secondCard: string | null
+    let hasFlippedCard: boolean = false
+    let lockBoard: boolean = false
+    let firstCard: string | null = null
+    let secondCard: string | null = null
     let couple: number = 0
 
-    function flipCard() {
-        if (lockBoard) return
-        if (this === firstCard) return
-
-        this.classList.add('flip')
+    function flipCard(playcard: HTMLElement | null) { 
+        if (lockBoard) return 
+        if (playcard === firstCard) return; 
+        
+        if (playcard !== null) { 
+            
+            playcard.classList.add('flip') 
+        } 
+        
 
         if (!hasFlippedCard) {
             hasFlippedCard = true
-            firstCard = this
+            firstCard = playcard
             return
         }
 
-        secondCard = this
+        secondCard = playcard
 
         checkForMatch()
     }
@@ -319,8 +322,8 @@ export function renderCardList(cardListNumber: number) {
     }
 
     function disableCards() {
-        firstCard.removeEventListener('click', flipCard)
-        secondCard.removeEventListener('click', flipCard)
+        firstCard?.removeEventListener('click', flipCard)
+        secondCard?.removeEventListener('click', flipCard)
 
         resetBoard()
     }
@@ -329,15 +332,17 @@ export function renderCardList(cardListNumber: number) {
         lockBoard = true
 
         setTimeout(() => {
-            firstCard.classList.remove('flip')
-            secondCard.classList.remove('flip')
+            firstCard?.classList.remove('flip')
+            secondCard?.classList.remove('flip')
             renderEndScreen('Вы проиграли!', "url('./static/img/lose.png')")
         }, 1500)
     }
 
     function resetBoard() {
-        ;[hasFlippedCard, lockBoard] = [false, false]
-        ;[firstCard, secondCard] = [null, null]
+        hasFlippedCard = false
+        lockBoard = false
+        firstCard = null
+        secondCard = null
     }
 
     cards.forEach((card) => card.addEventListener('click', flipCard))
