@@ -1,5 +1,5 @@
 // Методы для перемешивания карт
-export const shuffle = (array: string[]) => {
+export const shuffle = (): => {
     let currentIndex = array.length,
         randomIndex
     while (currentIndex !== 0) {
@@ -13,5 +13,5 @@ export const shuffle = (array: string[]) => {
     return array
 }
 
-export const duplicateArray = (array: array<cardListData>) =>
-    array.reduce((res, current) => res.concat([current, current]), [])
+export const duplicateArray = (array: string[]) => [...array, ...array]
+    array.reduce((res:Array<String>, current: String) => res.concat([current, current]), [])
