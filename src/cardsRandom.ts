@@ -1,6 +1,12 @@
 // Методы для перемешивания карт
-export const shuffle = (): => {
-    let currentIndex = array.length,
+interface cardList {
+    id: string
+    name: string
+    image: string
+}
+export const shuffle = (array:cardList[]) => {
+    let count:number = array.length
+    let currentIndex = count,
         randomIndex
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex)
@@ -13,5 +19,5 @@ export const shuffle = (): => {
     return array
 }
 
-export const duplicateArray = (array: string[]) => [...array, ...array]
-    array.reduce((res:Array<String>, current: String) => res.concat([current, current]), [])
+export const duplicateArray = (array:cardList[]) => [...array, ...array]
+    array.reduce((res:string , current:string ) => res.concat([current, current]), [])

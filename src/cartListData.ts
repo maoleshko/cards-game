@@ -3,13 +3,13 @@ import { tryAgain } from './reloadGame'
 import { timer } from './timer'
 import { shuffle, duplicateArray } from './cardsRandom'
 
-interface cardListData {
-    id: String
-    name: String
-    image: String
-}[]
+
 //Главный игровой экран с полем карт и игровой логикой
-const cardListData = [
+const cardListData:{
+    id: string
+    name: string
+    image: string
+}[] = [
     {
         id: 'spades-6',
         name: 'spades 6',
@@ -240,22 +240,13 @@ export function renderCardList(cardListNumber: number) {
     shuffle(cardListData)
     // Возвращаем новый массив элементов, который будет содержать от 0 до указанного количества карт
     const cardList = cardListData.slice(0, cardListNumber)
-    interface cardList {
-        id: string
-        name: string
-        image: string
-    }
-   
-    const duplicateCardsArray:cardList[] = duplicateArray(cardList)
+       
+    const duplicateCardsArray = duplicateArray(cardList)
+
     shuffle(duplicateCardsArray)
 
-    interface card {
-        image: string
-        name: string
-        'data-framework': string
-    }
     // Для каждого элемента массива будет создан div
-    duplicateCardsArray.forEach((card: card) => {
+    duplicateCardsArray.forEach((card) => {
         const cardElement = document.createElement('div')
         cardElement.classList.add('memory-card')
         cardElement.classList.add('flip')
@@ -319,11 +310,6 @@ export function renderCardList(cardListNumber: number) {
             return
         }
         unflipCards()
-        // let firsMark: string = firstCard.dataset.framework
-        // let secondMark: string = secondCard.dataset.framework
-        // let isMatch =
-        // firsMark === secondMark
-        // isMatch ? disableCards() : unflipCards()
         couple++
         if (couple === cardListNumber) {
             setTimeout(() => {
