@@ -279,19 +279,17 @@ export function renderCardList(cardListNumber: number) {
 
     let hasFlippedCard: boolean = false
     let lockBoard: boolean = false
-    let firstCard: string | null = null
-    let secondCard: string | null = null
+    let firstCard: null | HTMLElement = null
+    let secondCard: null | HTMLElement = null
     let couple: number = 0
 
-    function flipCard(playcard: HTMLElement | null) { 
-        if (lockBoard) return 
-        if (playcard === firstCard) return; 
-        
-        if (playcard !== null) { 
-            
-            playcard.classList.add('flip') 
-        } 
-        
+    function flipCard(playcard: HTMLElement | null) {
+        if (lockBoard) return
+        if (playcard === firstCard) return
+
+        if (playcard !== null) {
+            playcard?.classList.add('flip')
+        }
 
         if (!hasFlippedCard) {
             hasFlippedCard = true
@@ -322,8 +320,14 @@ export function renderCardList(cardListNumber: number) {
     }
 
     function disableCards() {
-        firstCard?.removeEventListener('click', flipCard)
-        secondCard?.removeEventListener('click', flipCard)
+        firstCard?.removeEventListener('click', (event: Event) => {
+            flipCard
+        })
+        secondCard?.removeEventListener('click', (event: Event) => {
+            flipCard
+        })
+        // firstCard?.removeEventListener('click', flipCard)
+        // secondCard?.removeEventListener('click', flipCard)
 
         resetBoard()
     }
@@ -345,5 +349,10 @@ export function renderCardList(cardListNumber: number) {
         secondCard = null
     }
 
-    cards.forEach((card) => card.addEventListener('click', flipCard))
+    cards.forEach((card) =>
+        card.addEventListener('click', (event: Event) => {
+            flipCard
+        })
+    )
+    // cards.forEach((card) => card.addEventListener('click', flipCard))
 }
