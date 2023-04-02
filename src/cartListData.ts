@@ -1,11 +1,14 @@
 import { renderEndScreen } from './endGameScreen'
 import { tryAgain } from './reloadGame'
 import { timer } from './timer'
-import { shuffle } from './cardsRandom'
-import { duplicateArray } from './cardsRandom'
+import { shuffle, duplicateArray } from './cardsRandom'
 
 //Главный игровой экран с полем карт и игровой логикой
-const cardListData = [
+const cardListData: {
+    id: string
+    name: string
+    image: string
+}[] = [
     {
         id: 'spades-6',
         name: 'spades 6',
@@ -189,7 +192,7 @@ const cardListData = [
     },
 ]
 
-export function renderCardList(cardListNumber) {
+export function renderCardList(cardListNumber: number) {
     const gameMenu = document.querySelector('.game-menu')
     const timeBoard = document.createElement('div')
     timeBoard.classList.add('timeBoard')
@@ -215,7 +218,12 @@ export function renderCardList(cardListNumber) {
     const reloadButton = document.createElement('button')
     reloadButton.textContent = 'Начать заново'
     reloadButton.classList.add('button', 'btn-reload')
-    gameMenu.appendChild(timeBoard)
+    if (gameMenu !== null) {
+        gameMenu.appendChild(timeBoard)
+        gameMenu.appendChild(reloadButton)
+    } else {
+        console.warn('error')
+    }
     timeBoard.appendChild(min)
     timeBoard.appendChild(label)
     timeBoard.appendChild(sec)
@@ -223,23 +231,27 @@ export function renderCardList(cardListNumber) {
     sec.appendChild(timeLabelsec)
     min.appendChild(timemin)
     sec.appendChild(timesec)
-    gameMenu.appendChild(reloadButton)
+
     timer()
     reloadButton.addEventListener('click', tryAgain)
-    const cardsСontainer = document.querySelector('.container')
+    const cardsСontainer = document.querySelector('.container') as HTMLElement
 
     shuffle(cardListData)
     // Возвращаем новый массив элементов, который будет содержать от 0 до указанного количества карт
     const cardList = cardListData.slice(0, cardListNumber)
+
     const duplicateCardsArray = duplicateArray(cardList)
+
     shuffle(duplicateCardsArray)
+
     // Для каждого элемента массива будет создан div
     duplicateCardsArray.forEach((card) => {
         const cardElement = document.createElement('div')
         cardElement.classList.add('memory-card')
         cardElement.classList.add('flip')
+
         //Создаем элемент img и указываем атрибуты
-        const imgElement = document.createElement('img')
+        const imgElement = document.createElement('img') as HTMLImageElement
         //Задаем атрибуты для игоровой карточки
         imgElement.setAttribute('src', card.image)
         imgElement.setAttribute('alt', card.name)
@@ -265,32 +277,40 @@ export function renderCardList(cardListNumber) {
         })
     }, 1000)
 
-    let hasFlippedCard = false
-    let lockBoard = false
-    let firstCard, secondCard
-    let couple = 0
+    let hasFlippedCard: boolean = false
+    let lockBoard: boolean = false
+    let firstCard: null | HTMLElement = null
+    let secondCard: null | HTMLElement = null
+    let couple: number = 0
 
-    function flipCard() {
+    function flipCard(playcard: HTMLElement | null) {
         if (lockBoard) return
-        if (this === firstCard) return
+        if (playcard === firstCard) return
 
-        this.classList.add('flip')
+        if (playcard !== null) {
+            playcard?.classList.add('flip')
+        }
 
         if (!hasFlippedCard) {
             hasFlippedCard = true
-            firstCard = this
+            firstCard = playcard
             return
         }
 
-        secondCard = this
+        secondCard = playcard
 
         checkForMatch()
     }
 
     function checkForMatch() {
-        let isMatch =
-            firstCard.dataset.framework === secondCard.dataset.framework
-        isMatch ? disableCards() : unflipCards()
+        if (firstCard === null || secondCard === null) {
+            return
+        }
+        if (firstCard.dataset.framework === secondCard.dataset.framework) {
+            disableCards()
+            return
+        }
+        unflipCards()
         couple++
         if (couple === cardListNumber) {
             setTimeout(() => {
@@ -300,8 +320,14 @@ export function renderCardList(cardListNumber) {
     }
 
     function disableCards() {
-        firstCard.removeEventListener('click', flipCard)
-        secondCard.removeEventListener('click', flipCard)
+        firstCard?.removeEventListener('click', (event: Event) => {
+            flipCard
+        })
+        secondCard?.removeEventListener('click', (event: Event) => {
+            flipCard
+        })
+        // firstCard?.removeEventListener('click', flipCard)
+        // secondCard?.removeEventListener('click', flipCard)
 
         resetBoard()
     }
@@ -310,16 +336,23 @@ export function renderCardList(cardListNumber) {
         lockBoard = true
 
         setTimeout(() => {
-            firstCard.classList.remove('flip')
-            secondCard.classList.remove('flip')
+            firstCard?.classList.remove('flip')
+            secondCard?.classList.remove('flip')
             renderEndScreen('Вы проиграли!', "url('./static/img/lose.png')")
         }, 1500)
     }
 
     function resetBoard() {
-        ;[hasFlippedCard, lockBoard] = [false, false]
-        ;[firstCard, secondCard] = [null, null]
+        hasFlippedCard = false
+        lockBoard = false
+        firstCard = null
+        secondCard = null
     }
 
-    cards.forEach((card) => card.addEventListener('click', flipCard))
+    cards.forEach((card) =>
+        card.addEventListener('click', (event: Event) => {
+            flipCard
+        })
+    )
+    // cards.forEach((card) => card.addEventListener('click', flipCard))
 }

@@ -1,15 +1,18 @@
 import { resetGame } from './reloadGame'
 
 // Экран вывода победы и поражения
-export function renderEndScreen(Status, image) {
-    const min = document.querySelector('.timemin').textContent
-    const sec = document.querySelector('.timesec').textContent
+export function renderEndScreen(Status: string, image: string) {
+    const min = document.querySelector('.timemin')
+    const sec = document.querySelector('.timesec')
+    const element = document.querySelector('.timemin')
+
+    
     window.application.time = min + '.' + sec
-    const gameMenu = document.querySelector('.game-menu')
+    const gameMenu = document.querySelector('.game-menu') as HTMLElement
     gameMenu.textContent = ''
-    const gamecontainer = document.querySelector('.container')
+    const gamecontainer = document.querySelector('.container') as HTMLElement
     gamecontainer.textContent = ''
-    const APP_CONTAINER = document.querySelector('.app')
+    const APP_CONTAINER = document.querySelector('.app') as HTMLElement
     APP_CONTAINER.innerHTML = ''
     window.application.levels = ''
 
