@@ -248,7 +248,7 @@ export function renderCardList(cardListNumber: number) {
     duplicateCardsArray.forEach((card) => {
         const cardElement = document.createElement('div')
         cardElement.classList.add('memory-card')
-        cardElement.classList.add('flip')
+        cardElement.classList.add('flipped')
 
         //Создаем элемент img и указываем атрибуты
         const imgElement = document.createElement('img') as HTMLImageElement
@@ -256,7 +256,7 @@ export function renderCardList(cardListNumber: number) {
         imgElement.setAttribute('src', card.image)
         imgElement.setAttribute('alt', card.name)
         imgElement.setAttribute('class', 'front-face')
-        cardElement.setAttribute('data-framework', `${card.name}`)
+        cardElement.setAttribute('name', card.name)
         const imgElementBack = document.createElement('img')
         imgElementBack.setAttribute('src', './static/img/back.png')
         imgElementBack.setAttribute('alt', 'backSide')
