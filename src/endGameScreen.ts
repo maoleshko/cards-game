@@ -1,12 +1,12 @@
 import { resetGame } from './reloadGame'
 
+
 // Экран вывода победы и поражения
 export function renderEndScreen(Status: string, image: string) {
     const min = document.querySelector('.timemin')
     const sec = document.querySelector('.timesec')
     const element = document.querySelector('.timemin')
 
-    
     window.application.time = min + '.' + sec
     const gameMenu = document.querySelector('.game-menu') as HTMLElement
     gameMenu.textContent = ''
@@ -16,27 +16,25 @@ export function renderEndScreen(Status: string, image: string) {
     APP_CONTAINER.innerHTML = ''
     window.application.levels = ''
 
-    const emojiImage = document.createElement('div')
+    const emojiImage = document.createElement('div') as HTMLElement
     emojiImage.classList.add('emojiImage')
-    // emojiImage.style.backgroundImage = "url('./static/img/lose.png')"
     emojiImage.style.backgroundImage = image
-    console.log(image)
-    console.log(emojiImage)
+    
 
-    const title = document.createElement('h1')
+    const title = document.createElement('h1') as HTMLElement
     title.classList.add('title')
     title.textContent = Status
 
-    const h2 = document.createElement('h2')
+    const h2 = document.createElement('h2') as HTMLElement
     h2.classList.add('timeRoundLabel')
     h2.textContent = 'Затраченное время:'
 
-    const timeRound = document.createElement('h1')
+    const timeRound = document.createElement('h1') as HTMLElement
     timeRound.classList.add('timeRound')
     timeRound.textContent = window.application.time
     window.application.stopInterval()
 
-    const buttonRestart = document.createElement('button')
+    const buttonRestart = document.createElement('button') as HTMLElement
     buttonRestart.classList.add('button-restart', 'button')
     buttonRestart.textContent = 'Играть снова'
     buttonRestart.addEventListener('click', resetGame)

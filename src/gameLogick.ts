@@ -1,8 +1,9 @@
-import { count } from 'console'
 import { renderEndScreen } from './endGameScreen'
 
 export function gameLogick(): void {
     const cards = document.querySelectorAll('.memory-card')
+
+    let couple = 0
 
     setTimeout(() => {
         cards.forEach((card) => {
@@ -10,50 +11,40 @@ export function gameLogick(): void {
         })
     }, 2000)
 
-    cards.forEach((card) =>
+    cards.forEach((card, index) =>
         card.addEventListener('click', (e: Event) => {
-            card.classList.toggle('toggleCard')
             card.classList.add('flipped')
-            checkCards(e)
+            checkCards(cards[index])
         })
     )
-
-   
-
-    const checkCards = (e: Event) => {
-        const clickedCard = e.target
+    const checkCards = (e: Element) => {
+        const clickedCard = e
         if (clickedCard !== null) {
-            // clickedCard.classList.add('flipped')
+            clickedCard.classList.add('flip')
         }
-        cards.forEach((card, index) =>
-        card.addEventListener('click', () => {
-            card.classList.add('flip');
-            if(index) {
-                card.classList.add('flipped')
-                console.log(cards[index])
-            }
-            
-        })
-)
-        const flippedCard = document.querySelectorAll('flipped')
+        const flippedCards = document.querySelectorAll('.flip')
 
-       
-
-        if (flippedCard.length === 2) {
+        if (flippedCards.length === 2) {
             if (
-                flippedCard[0].getAttribute('name') ===
-                flippedCard[1].getAttribute('name')
+                flippedCards[0].getAttribute('name') ===
+                flippedCards[1].getAttribute('name')
             ) {
-                console.log('match')
+                couple++
+                flippedCards.forEach((card) => {
+                    card.classList.remove('flip')
+                })
+
+                if (cards.length === couple * 2) {
+                    setTimeout(() => {
+                        renderEndScreen('Вы победили!',"url('./static/img/win.png')")
+                    }, 1000)
+                }
             } else {
                 setTimeout(() => {
-                    renderEndScreen(
-                        'Вы проиграли!',
-                        "url('./static/img/lose.png')"
-                    )
-                }, 1500)
+                    renderEndScreen('Вы проиграли!', "url('./static/img/lose.png')")
+                }, 1000)
+                
             }
         }
-        console.log('flippedCard.length',flippedCard.length)
     }
 }
