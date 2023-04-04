@@ -1,13 +1,21 @@
 import { resetGame } from './reloadGame'
 
-
 // Экран вывода победы и поражения
 export function renderEndScreen(Status: string, image: string) {
     const min = document.querySelector('.timemin')
     const sec = document.querySelector('.timesec')
     const element = document.querySelector('.timemin')
 
-    window.application.time = min + '.' + sec
+    if (min !== null && sec !== null) {
+        let minuts: string = min!.innerHTML
+        let seconds: string = sec!.innerHTML
+       
+        window.application.time =  minuts + '.' + seconds
+    }
+    let timeTime: string | [] = window.application.time
+    let timeStr:string = timeTime.toString()
+    console.log(timeStr)
+    
     const gameMenu = document.querySelector('.game-menu') as HTMLElement
     gameMenu.textContent = ''
     const gamecontainer = document.querySelector('.container') as HTMLElement
@@ -19,7 +27,6 @@ export function renderEndScreen(Status: string, image: string) {
     const emojiImage = document.createElement('div') as HTMLElement
     emojiImage.classList.add('emojiImage')
     emojiImage.style.backgroundImage = image
-    
 
     const title = document.createElement('h1') as HTMLElement
     title.classList.add('title')
@@ -31,7 +38,8 @@ export function renderEndScreen(Status: string, image: string) {
 
     const timeRound = document.createElement('h1') as HTMLElement
     timeRound.classList.add('timeRound')
-    timeRound.textContent = window.application.time
+    timeRound.innerHTML = ''
+    timeRound.textContent = timeStr
     window.application.stopInterval()
 
     const buttonRestart = document.createElement('button') as HTMLElement
