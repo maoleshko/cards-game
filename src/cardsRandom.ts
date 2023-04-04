@@ -4,8 +4,8 @@ interface cardList {
     name: string
     image: string
 }
-export const shuffle = (array:cardList[]) => {
-    let count:number = array.length
+export const shuffle = (array: cardList[]) => {
+    let count: number = array.length
     let currentIndex = count,
         randomIndex
     while (currentIndex !== 0) {
@@ -20,11 +20,14 @@ export const shuffle = (array:cardList[]) => {
 }
 
 interface MyInterface {
-    type: string;
-  }
-  let array:MyInterface[] = [];
+    type: string
+}
+let array: MyInterface[] = []
 
 export const duplicateArray = (array: cardList[]): cardList[] => {
-    const duplicated = [...array, ...array];
-    return duplicated.reduce((res: cardList[], current: cardList) => res.concat([current, current]), []);
-  }
+    const duplicated = [...array, ...array]
+    return duplicated.reduce(
+        (res: cardList[], current: cardList) => res.concat([current]),
+        []
+    )
+}

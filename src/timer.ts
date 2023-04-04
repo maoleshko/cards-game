@@ -3,7 +3,9 @@ export function timer(): void {
     let secs = 0
     let mins = 0
     const timemin = document.querySelector('.timemin') as HTMLElement
+    // timemin!.innerHTML = String(timemin)
     const timesec = document.querySelector('.timesec') as HTMLElement
+    // timesec!.innerHTML = String(timesec)
 
     const gameTime = setInterval(function () {
         secs++
