@@ -41,7 +41,7 @@ const shuffle = (array) => {
 let array = [];
 const duplicateArray = (array) => {
     const duplicated = [...array, ...array];
-    return duplicated.reduce((res, current) => res.concat([current, current]), []);
+    return duplicated.reduce((res, current) => res.concat([current]), []);
 };
 
 
@@ -57,7 +57,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "renderCardList": () => (/* binding */ renderCardList)
 /* harmony export */ });
-/* harmony import */ var _endGameScreen__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./endGameScreen */ "./src/endGameScreen.ts");
+/* harmony import */ var _gameLogick__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./gameLogick */ "./src/gameLogick.ts");
 /* harmony import */ var _reloadGame__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./reloadGame */ "./src/reloadGame.ts");
 /* harmony import */ var _timer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./timer */ "./src/timer.ts");
 /* harmony import */ var _cardsRandom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./cardsRandom */ "./src/cardsRandom.ts");
@@ -300,14 +300,14 @@ function renderCardList(cardListNumber) {
     duplicateCardsArray.forEach((card) => {
         const cardElement = document.createElement('div');
         cardElement.classList.add('memory-card');
-        cardElement.classList.add('flip');
+        cardElement.classList.add('flipped');
         //Создаем элемент img и указываем атрибуты
         const imgElement = document.createElement('img');
         //Задаем атрибуты для игоровой карточки
         imgElement.setAttribute('src', card.image);
         imgElement.setAttribute('alt', card.name);
         imgElement.setAttribute('class', 'front-face');
-        cardElement.setAttribute('data-framework', `${card.name}`);
+        cardElement.setAttribute('name', card.name);
         const imgElementBack = document.createElement('img');
         imgElementBack.setAttribute('src', './static/img/back.png');
         imgElementBack.setAttribute('alt', 'backSide');
@@ -318,79 +318,7 @@ function renderCardList(cardListNumber) {
         // Добавляем элемент div с классом card на освной экран с контейнер
         cardsСontainer.appendChild(cardElement);
     });
-    const cards = document.querySelectorAll('.memory-card');
-    setTimeout(() => {
-        cards.forEach((card) => {
-            card.classList.remove('flip');
-        });
-    }, 1000);
-    let hasFlippedCard = false;
-    let lockBoard = false;
-    let firstCard = null;
-    let secondCard = null;
-    let couple = 0;
-    function flipCard(card) {
-        if (lockBoard)
-            return;
-        if (card === firstCard)
-            return;
-        if (card !== null) {
-            card === null || card === void 0 ? void 0 : card.classList.add('flip');
-        }
-        if (!hasFlippedCard) {
-            hasFlippedCard = true;
-            firstCard = card;
-            return;
-        }
-        secondCard = card;
-        checkForMatch();
-    }
-    function checkForMatch() {
-        if (firstCard === null || secondCard === null) {
-            return;
-        }
-        if (firstCard.dataset.framework === secondCard.dataset.framework) {
-            disableCards();
-            return;
-        }
-        unflipCards();
-        couple++;
-        if (couple === cardListNumber) {
-            setTimeout(() => {
-                (0,_endGameScreen__WEBPACK_IMPORTED_MODULE_0__.renderEndScreen)('Вы победили!', "url('./static/img/win.png')");
-            }, 1000);
-        }
-    }
-    function disableCards() {
-        firstCard === null || firstCard === void 0 ? void 0 : firstCard.removeEventListener('click', (event) => {
-            flipCard;
-        });
-        secondCard === null || secondCard === void 0 ? void 0 : secondCard.removeEventListener('click', (event) => {
-            flipCard;
-        });
-        // firstCard?.removeEventListener('click', flipCard)
-        // secondCard?.removeEventListener('click', flipCard)
-        resetBoard();
-    }
-    function unflipCards() {
-        lockBoard = true;
-        setTimeout(() => {
-            firstCard === null || firstCard === void 0 ? void 0 : firstCard.classList.remove('flip');
-            secondCard === null || secondCard === void 0 ? void 0 : secondCard.classList.remove('flip');
-            (0,_endGameScreen__WEBPACK_IMPORTED_MODULE_0__.renderEndScreen)('Вы проиграли!', "url('./static/img/lose.png')");
-        }, 1500);
-    }
-    function resetBoard() {
-        hasFlippedCard = false;
-        lockBoard = false;
-        firstCard = null;
-        secondCard = null;
-    }
-    cards.forEach((card) => card.addEventListener('click', (event) => {
-        console.log('Карта нажата');
-        card.classList.add('flip');
-    }));
-    // cards.forEach((card) => card.addEventListener('click', flipCard))
+    (0,_gameLogick__WEBPACK_IMPORTED_MODULE_0__.gameLogick)();
 }
 
 
@@ -413,7 +341,14 @@ function renderEndScreen(Status, image) {
     const min = document.querySelector('.timemin');
     const sec = document.querySelector('.timesec');
     const element = document.querySelector('.timemin');
-    window.application.time = min + '.' + sec;
+    if (min !== null && sec !== null) {
+        let minuts = min.innerHTML;
+        let seconds = sec.innerHTML;
+        window.application.time = minuts + '.' + seconds;
+    }
+    let timeTime = window.application.time;
+    let timeStr = timeTime.toString();
+    console.log(timeStr);
     const gameMenu = document.querySelector('.game-menu');
     gameMenu.textContent = '';
     const gamecontainer = document.querySelector('.container');
@@ -423,10 +358,7 @@ function renderEndScreen(Status, image) {
     window.application.levels = '';
     const emojiImage = document.createElement('div');
     emojiImage.classList.add('emojiImage');
-    // emojiImage.style.backgroundImage = "url('./static/img/lose.png')"
     emojiImage.style.backgroundImage = image;
-    console.log(image);
-    console.log(emojiImage);
     const title = document.createElement('h1');
     title.classList.add('title');
     title.textContent = Status;
@@ -435,7 +367,8 @@ function renderEndScreen(Status, image) {
     h2.textContent = 'Затраченное время:';
     const timeRound = document.createElement('h1');
     timeRound.classList.add('timeRound');
-    timeRound.textContent = window.application.time;
+    timeRound.innerHTML = '';
+    timeRound.textContent = timeStr;
     window.application.stopInterval();
     const buttonRestart = document.createElement('button');
     buttonRestart.classList.add('button-restart', 'button');
@@ -447,6 +380,61 @@ function renderEndScreen(Status, image) {
     APP_CONTAINER.appendChild(h2);
     APP_CONTAINER.appendChild(timeRound);
     APP_CONTAINER.appendChild(buttonRestart);
+}
+
+
+/***/ }),
+
+/***/ "./src/gameLogick.ts":
+/*!***************************!*\
+  !*** ./src/gameLogick.ts ***!
+  \***************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "gameLogick": () => (/* binding */ gameLogick)
+/* harmony export */ });
+/* harmony import */ var _endGameScreen__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./endGameScreen */ "./src/endGameScreen.ts");
+
+function gameLogick() {
+    const cards = document.querySelectorAll('.memory-card');
+    let couple = 0;
+    setTimeout(() => {
+        cards.forEach((card) => {
+            card.classList.remove('flipped');
+        });
+    }, 2000);
+    cards.forEach((card, index) => card.addEventListener('click', (e) => {
+        card.classList.add('flipped');
+        checkCards(cards[index]);
+    }));
+    const checkCards = (e) => {
+        const clickedCard = e;
+        if (clickedCard !== null) {
+            clickedCard.classList.add('flip');
+        }
+        const flippedCards = document.querySelectorAll('.flip');
+        if (flippedCards.length === 2) {
+            if (flippedCards[0].getAttribute('name') ===
+                flippedCards[1].getAttribute('name')) {
+                couple++;
+                flippedCards.forEach((card) => {
+                    card.classList.remove('flip');
+                });
+                if (cards.length === couple * 2) {
+                    setTimeout(() => {
+                        (0,_endGameScreen__WEBPACK_IMPORTED_MODULE_0__.renderEndScreen)('Вы победили!', "url('./static/img/win.png')");
+                    }, 1000);
+                }
+            }
+            else {
+                setTimeout(() => {
+                    (0,_endGameScreen__WEBPACK_IMPORTED_MODULE_0__.renderEndScreen)('Вы проиграли!', "url('./static/img/lose.png')");
+                }, 1000);
+            }
+        }
+    };
 }
 
 
@@ -605,7 +593,9 @@ function timer() {
     let secs = 0;
     let mins = 0;
     const timemin = document.querySelector('.timemin');
+    // timemin!.innerHTML = String(timemin)
     const timesec = document.querySelector('.timesec');
+    // timesec!.innerHTML = String(timesec)
     const gameTime = setInterval(function () {
         secs++;
         if (secs === 60) {
