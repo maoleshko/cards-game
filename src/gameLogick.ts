@@ -9,7 +9,7 @@ export function gameLogick(): void {
         cards.forEach((card) => {
             card.classList.remove('flipped')
         })
-    }, 2000)
+    }, 5000)
 
     cards.forEach((card, index) =>
         card.addEventListener('click', (e: Event) => {
