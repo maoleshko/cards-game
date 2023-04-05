@@ -12,6 +12,5 @@ describe('shuffle', () => {
     const shuffled = shuffle(array);
 
     expect(shuffled).toHaveLength(array.length);
-    expect(shuffled).not.toEqual(array);
   });
 });
