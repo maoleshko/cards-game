@@ -52,4 +52,5 @@ module.exports = {
         minimizer: ['...', new CssMinimizerPlugin()],
     },
     devtool: isProduction ? 'hidden-source-map' : 'source-map',
+    type: 'module',
 };

@@ -235,13 +235,13 @@ export function renderCardList(cardListNumber: number) {
     timer()
     reloadButton.addEventListener('click', tryAgain)
     const cardsСontainer = document.querySelector('.container') as HTMLElement
-
+    // Перемешиваем массив объектов, содержащий колоду карт
     shuffle(cardListData)
     // Возвращаем новый массив элементов, который будет содержать от 0 до указанного количества карт
     const cardList = cardListData.slice(0, cardListNumber)
-
+    // Дублируем игровой набор карт
     const duplicateCardsArray = duplicateArray(cardList)
-
+    // Перемешиваем карты а столе
     shuffle(duplicateCardsArray)
 
     // Для каждого элемента массива будет создан div
